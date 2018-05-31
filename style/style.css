@@ -1,0 +1,83 @@
+/* Fonts */
+@font-face {
+	font-family: 'Burger_Quiz';
+	src: url('../res/horseshoes.ttf');
+}
+@font-face {
+	font-family: 'Burger_Quiz_Inverted';
+	src: url('../res/horseshoeslemonade.ttf');
+}
+.inv {
+	font-family: 'Burger_Quiz_Inverted';
+}
+
+/* Animations */
+@keyframes enter {
+	0%   {transform:translateY(-100vh);}
+	100% {transform:translateY(0vh);}
+}
+.enter{
+	animation-name:enter;
+	animation-duration:0.2s;
+}
+.grow { transition: all .2s ease-in-out; }
+.grow:hover { transform: scale(1.1); }
+
+/* Colors */
+.blue { 	color: 			  #3C3DAB;}
+.bgblue { 	background-color: #3C3DAB;}
+.yellow {	color: 			  #DAAE0F;}
+.bgyellow {	background-color: #DAAE0F;}
+.red {		color: 			  #CA2F1E;}
+.bgred {	background-color: #CA2F1E;}
+.green {	color: 			  #50CB1E;}
+.bggreen {	background-color: #50CB1E;}
+
+/* Default style */
+body {
+	background-color: black;
+}
+p, h1, h2, h3, h4, h5 {
+	color: white;
+	font-family:'Burger_Quiz';
+	margin: 0;
+}
+.button{
+	display: inline-block;
+	font-size: 8vh;
+	text-align: center;
+	padding: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-radius: 30px;
+	margin:5vh;
+    text-decoration: none;
+}
+.flex{
+	display:inline-flex;
+	width: 100%;
+}
+
+/* Logo style */
+#logo-big {
+	height: 70vh;
+	display: block;
+	margin: auto;
+}
+
+/* Game style */
+#title {
+	text-align:center;
+	font-size:20vh;
+}
+#intro {
+	height:96vh;
+	margin:auto;
+	display:none;
+}
+#countdown {
+	text-align:center;
+	font-size:30vh;
+	color:red;
+	display:none;
+}
