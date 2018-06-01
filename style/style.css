@@ -37,10 +37,14 @@
 body {
 	background-color: black;
 }
-p, h1, h2, h3, h4, h5 {
+input, a, label, p, h1, h2, h3, h4, h5 {
 	color: white;
 	font-family:'Burger_Quiz';
 	margin: 0;
+}
+label, input {
+	background-color: black;
+	font-size: 9vh;
 }
 .button{
 	display: inline-block;
@@ -50,12 +54,14 @@ p, h1, h2, h3, h4, h5 {
 	padding-left: 20px;
 	padding-right: 20px;
 	border-radius: 30px;
-	margin:5vh;
+	margin: 5vh;
     text-decoration: none;
+	border-width: 0;
+	cursor: pointer;
 }
-.flex{
-	display:inline-flex;
-	width: 100%;
+.title{
+	text-align: center;
+	font-size: 20vh;
 }
 
 /* Logo style */
@@ -64,12 +70,19 @@ p, h1, h2, h3, h4, h5 {
 	display: block;
 	margin: auto;
 }
+#logo-small {
+	height: 15vw;
+	position: absolute;
+}
+
+/* Forms style */
+#code {
+	margin-left: 20vh;
+	padding-left: 2vh;
+	width: 16vh;
+}
 
 /* Game style */
-#title {
-	text-align:center;
-	font-size:20vh;
-}
 #intro {
 	height:96vh;
 	margin:auto;
