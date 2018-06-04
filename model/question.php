@@ -1,46 +1,36 @@
 <?php
-include "proposition.php";
 class Question {
-	private $id, $categorie, $label_1, $label_2, $propositions;
-	public function __construct($id, $categorie, $label_1, $label_2, $propositions = array()){
+	private $id, $id_category, $label1, $label2;
+	private function __construct($id, $id_categorie, $label1, $label2){
 		$this->id = $id;
-		$this->categorie = $categorie;
-		$this->label_1 = $label_1;
-		$this->label_2 = $label_2;
-		$this->propositions = $propositions;
+		$this->id_categorie = $id_categorie;
+		$this->label1 = $label1;
+		$this->label2 = $label2;
 	}
-	public function getCategory(){
-		return $this->categorie;
+	
+	public function getLabel1(){
+		return $this->label1;
 	}
-	public function getStatement_1(){
-		return $this->label_1;
+	public function getLabel2(){
+		return $this->label2;
 	}
-	public function getStatement_2(){
-		return $this->label_2;
+	public function getCategorie($dbh){
+		return Categorie::get($dbh, $id_categorie);
 	}
-	public function getPropositions(){
-		return $propositions;
+	public function getPropositions($dbh){
+		return Proposition::get($dbh, NULL, $id);
 	}
-	public function addProposition($proposition, $reponse){
-		if(!isset($proposition) || !isset($reponse))
-			return;
-		array_push($this->propositions, $proposition);
-		array_push($this->reponses, $reponse);
-	}
-	public static function get($dbh, $id = NULL, $categorie = NULL, $label_1 = NULL, $label_2 = NULL){
+	
+	public static function get($dbh, $id=NULL, $id_categorie=NULL){
 		//Generate conditions
 		$conditions = "1 ";
-		if(isset($id))			$conditions .= " AND `id` = :id";
-		if(isset($categorie))	$conditions .= " AND `categorie` = :categorie";
-		if(isset($label_1))	 	$conditions .= " AND `label_1` = :label_1";
-		if(isset($label_2))	 	$conditions .= " AND `label_2` = :label_2";
+		if(isset($id))				$conditions .= " AND `id_question` = :id";
+		if(isset($id_categorie))	$conditions .= " AND `id_categorie` = :categorie";
 		//Prepare querry
-		$q = $dbh->prepare("".$conditions.";");
+		$q = $dbh->prepare("SELECT `id_question` as id, `label1`, `label2`, `id_categorie` FROM `question` WHERE ".$conditions.";");
 		//Bind values
-		if(isset($id))			$q->bindValue(':id', $id, PDO::PARAM_INT);
-		if(isset($categorie))	$q->bindValue(':categorie', $categorie, PDO::PARAM_STR);
-		if(isset($label_1))	 	$q->bindValue(':label_1', $label_1, PDO::PARAM_STR);
-		if(isset($label_2))	 	$q->bindValue(':label_2', $label_2, PDO::PARAM_STR);
+		if(isset($id))				$q->bindValue(':id', $id, PDO::PARAM_INT);
+		if(isset($id_categorie))	$q->bindValue(':categorie', $id_categorie, PDO::PARAM_INT);
 		//Execute querry
 		$q->execute();
 		$result = $q->fetchAll();
@@ -48,8 +38,7 @@ class Question {
 		//Retrieve data into an array of objects 
 		$questions = array();
 		foreach ($result as $k => $question)
-			array_push($questions,new Question($question["id"],$question["categorie"],
-				$question["label_1"],$user["label_2"],Proposition::get($dbh, NULL, $question["id"]));
+			array_push($questions,new Question($question["id"],$question["id_categorie"],$question["label1"],$question["label2"]));
 		return $questions;
 	}
 }

@@ -1,7 +1,6 @@
 <?php
 	class Utilisateur {
 		private $id, $nom, $mdp, $mail, $code;
-	
 		public function __construct($id, $nom, $mdp, $mail, $code = NULL) {
 			$this->id = $id;
 			$this->nom = $nom;
@@ -24,6 +23,15 @@
 		}
 		public function getCode(){
 			return $this->code;
+		}
+		public function activate($dbh){
+			$this->code = 0;
+			//Prepare querry
+			$q = $dbh->prepare("UPDATE `utilisateur` SET `code_d_activation` = 0 WHERE `id_user` = :id");
+			//Bind values
+			$q->bindValue(':id', $this->id, PDO::PARAM_INT);
+			//Execute
+			$q->execute();
 		}
 		
 		public function ins($dbh) {
@@ -52,7 +60,7 @@
 		public static function get($dbh, $id=NULL, $nom=NULL, $mdp=NULL, $mail=NULL, $code=NULL) {
 			//Generate conditions
 			$conditions = "1 ";
-			if(isset($id))	 $conditions .= " AND `id` = :id";
+			if(isset($id))	 $conditions .= " AND `id_user` = :id";
 			if(isset($nom))	 $conditions .= " AND `nom` = :nom";
 			if(isset($mdp))	 $conditions .= " AND `mots_de_passe` = :mdp";
 			if(isset($mail)) $conditions .= " AND `mail` = :mail";

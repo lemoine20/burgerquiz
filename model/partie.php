@@ -1,6 +1,6 @@
 <?php
 class Partie {
-	private $categorie, $questions;
+	private $id, $propositions;
 	public function __construct($categorie, $count){
 		$this->categorie = $categorie;
 		$this->questions = array();

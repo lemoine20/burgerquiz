@@ -1,14 +1,14 @@
 var video = document.getElementById("intro");
-var title = document.getElementById("title");
+var question = document.getElementById("question");
 var countdown = document.getElementById("countdown");
-var beep = new Audio('beep.mp3');
-var go = new Audio('go.mp3');
+var beep = new Audio('res/beep.mp3');
+var go = new Audio('res/go.mp3');
 var msg = new SpeechSynthesisUtterance('Bernard Tapie, un tapis, ou les deux ?');
 msg.rate = 1.6;
 msg.pitch = 1.5;
 msg.lang = "fr";
 msg.onend = ()=>{
-	title.style.display = "none";
+	question.style.display = "none";
 	video.style.display = "block";
 	video.play();
 	video.onended = ()=>{

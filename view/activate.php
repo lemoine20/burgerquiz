@@ -3,10 +3,12 @@
 	<?php include "view/head.php";?>
 	<body>
 		<div style="margin-bottom: 15vh;">
-			<img id="logo-small" src="res/logo.svg" alt="Burger Quiz en ligne">
+			<a href="index.php">
+				<img id="logo-small" src="res/logo.svg" alt="Burger Quiz en ligne">
+			</a>
 			<p class="yellow title inv">Activation</p>
 		</div>
-		<form action="index.php?do=activate" method="POST">
+		<form action="index.php?do=home" method="POST">
 			<table align="center">
 				<tr>
 					<td><label for="code" class="green">Code</label></td>

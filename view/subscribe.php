@@ -4,10 +4,12 @@
 	<body>
 		<style>	label, input {font-size: 7vh;} </style>
 		<div style="margin-bottom:5vh;">
-			<img id="logo-small" src="res/logo.svg" alt="Burger Quiz en ligne">
+			<a href="index.php">
+				<img id="logo-small" src="res/logo.svg" alt="Burger Quiz en ligne">
+			</a>
 			<p class="yellow title inv">Inscription</p>
 		</div>
-		<form action="index.php?do=subscribe" method="POST">
+		<form action="index.php?do=activate" method="POST">
 			<table align="center">
 				<tr>
 					<td><label for="usr" class="red">Pseudo </label></td>
@@ -19,11 +21,11 @@
 				</tr>
 				<tr>
 					<td><label for="pwdv" class="red">Confirmation </label></td>
-					<td><input type="text" name="pwdv"></input></td>
+					<td><input type="password" name="pwdv"></input></td>
 				</tr>
 				<tr>
 					<td><label for="mail" class="yellow">Mail </label></td>
-					<td><input type="password" name="mail"></input></td>
+					<td><input type="text" name="mail"></input></td>
 				</tr>
 				<tr>
 					<td><a class="button bgred grow"  href="index.php">Annuler</a></td>
