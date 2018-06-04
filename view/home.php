@@ -17,8 +17,8 @@
 			</div>
 		</div>
 		<div align="center">
-			<a class="bgblue small-button" href="index.php?do=existante">Parties Existantes</a>
-			<a class="bggreen small-button" href="index.php?do=creation">Nouvelle Partie</a>
+			<a class="bgblue small-button grow" href="index.php?do=existante">Parties Existantes</a>
+			<a class="bggreen small-button grow" href="index.php?do=creation">Nouvelle Partie</a>
 		</div>
 	</body>
 </html>

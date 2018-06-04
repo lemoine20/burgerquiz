@@ -35,7 +35,11 @@
 		case "home": require 'view/home.php'; break;
 		case "parametres": require 'view/parametres.php'; break;
 		case "existante": require 'view/existante.php'; break;
-		case "creation": require 'view/creation.php'; break;
+		case "creation":
+			global $categories;
+			$categories = Categorie::get($dbh);
+			require 'view/creation.php';
+			break;
 		case "jeu": require 'view/jeu.php'; break;
 		case "disconnect":
 			session_unset();

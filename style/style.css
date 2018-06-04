@@ -16,6 +16,9 @@
 @-ms-viewport{
   width: device-width;
 }*/
+:focus{
+  outline:none;
+}
 
 /* Animations */
 @keyframes enter {
@@ -60,6 +63,7 @@ label{
 	margin-right: 10vh;
 }
 .button{
+	font-family:'Burger_Quiz';
 	display: inline-block;
 	font-size: 8vh;
 	text-align: center;
@@ -137,6 +141,29 @@ label{
 	padding-left: 2vh;
 	width: 24vh;
 }
+#selector { /*categorie radio button container*/
+	text-align: left;
+	display: inline-block;
+	padding: 10px;
+	border-radius: 30px;
+	border: 3px solid white;
+	vertical-align:top;
+	margin-right: 2vw;
+}
+.radio{
+  -webkit-appearance:button;
+  -moz-appearance:button;
+  appearance:button;
+  border:2vh solid #ccc;
+  background:#fff;
+  width:6vh;
+  height:6vh;
+  border-radius:50%;
+}
+.radio:checked{
+  border:2vh solid #50CB1E;
+}
+
 
 /* Game style */
 #intro {
