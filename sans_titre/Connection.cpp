@@ -1,14 +1,14 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "Connection.h"
+#include "ui_Connection.h"
 
-MainWindow::MainWindow(QWidget *parent) :
+Connection::Connection(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::Connection)
 {
     ui->setupUi(this);
 }
 
-MainWindow::~MainWindow()
+Connection::~Connection()
 {
     delete ui;
 }

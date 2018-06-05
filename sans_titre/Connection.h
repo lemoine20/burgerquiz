@@ -1,22 +1,22 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef CONNECTION_H
+#define CONNECTION_H
 
 #include <QMainWindow>
 
 namespace Ui {
-class MainWindow;
+class Connection;
 }
 
-class MainWindow : public QMainWindow
+class Connection : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+    explicit Connection(QWidget *parent = 0);
+    ~Connection();
 
 private:
-    Ui::MainWindow *ui;
+    Ui::Connection *ui;
 };
 
-#endif // MAINWINDOW_H
+#endif // CONNECTION_H

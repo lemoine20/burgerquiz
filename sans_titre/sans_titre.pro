@@ -12,9 +12,11 @@ TARGET = sans_titre
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        mainwindow.cpp
+SOURCES += main.cpp \
+    Connection.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += \
+    Connection.h
 
-FORMS    += mainwindow.ui
+FORMS    += \
+    Connection.ui

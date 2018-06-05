@@ -2,21 +2,20 @@
 #define MAINWINDOW_HPP
 
 #include <QMainWindow>
-#include <QtWidgets>
-
+#include <QWidget>
+#include <QGroupBox>
 
 class MainWindow : public QMainWindow{
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit MainWindow(QWidget *parent = 0);
-  ~MainWindow();
-  QGroupBox * BuildGroupBoxControle();
+    explicit MainWindow(QWidget *parent = 0);
+    ~MainWindow();
+    // QGroupBox * BuildGroupBoxControle();
 
 private:
-  // Ui::MainWindow *ui;
-  QWidget * widget_general;
-  QMenu * menuFichier;
+//    QWidget * widget_general;
+//    QMenu * menuFichier;
 
 };
 
