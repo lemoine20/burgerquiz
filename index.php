@@ -5,26 +5,56 @@
 	
 	global $config;
 	include "model/sql.php";
+	include "model/utilisateur.php";
+	include "model/partie.php";
+	include "model/categorie.php";
+	include "model/question.php";
+	include "model/proposition.php";
 	include "model/actions.php";
 	
 	$dbh = initDB();
 	session_start();
 	
 	$fail = false;
+	
 	if(isset($_POST["usr"]) && isset($_POST["pwd"]) && isset($_POST["mail"])){
+		//Subscribe: try to connect to the account and redirect to the activation if it succeed 
 		$fail = subscribe($dbh, $_POST["usr"], $_POST["pwd"], $_POST["mail"]);
 		$_GET["do"] = $fail ? "subscribe" : "activate";
 	}else if(isset($_POST["usr"]) && isset($_POST["pwd"])){
+		//Connect: try to connect to the account and redirect to home if it succeed 
 		$fail = connect($dbh, $_POST["usr"], $_POST["pwd"]);
 		$_GET["do"] = $fail ? "connect" : "home";
 	}else if(isset($_POST["code"])){
-		$fail = activate($dbh, $_POST["code"]);
+		//Activate: activate user account and redirect to the home
+		$fail = $_SESSION["usr"]->activate($dbh, $_POST["code"]);
 		$_GET["do"] = $fail ? "activate" : "home";
-	}else if(!isset($_SESSION["usr"]) || $_SESSION["usr"]->getCode() != 0){
-		if(!in_array($_GET["do"], $public_area))
-			$_GET["do"] = "disconnect";
+	}else if(!in_array($_GET["do"], $public_area) && (!isset($_SESSION["usr"]) || $_SESSION["usr"]->getCode() != 0)){
+		//Not connected and accessing forbidden page: redirect to index view
+		$_GET["do"] = "disconnect";
+	}else if(isset($_POST["nusr"]) && isset($_POST["npwd"])){
+		//Modify user informations
+		modify($dbh, $_POST["nusr"], $_POST["npwd"]);
+	}else if(isset($_POST["categorie"]) && isset($_POST["count"])){
+		//Create and generate a new partie
+		Partie::clear($dbh, $_SESSION["usr"]);
+		$partie = new Partie;
+		$categorie = Categorie::get($dbh, NULL, $_POST["categorie"]);
+		$categorie = sizeof($categorie) == 1 ? $categorie[0] : NULL;
+		$count = gettype($_POST["count"]) == "integer" ? $count : NULL;
+		if(!$partie->generate($dbh, $_POST["count"], $categorie)){
+			$fail = true;
+			$_GET["do"] = "creation";
+		}
+	}else if(isset($_GET["answers"])){
+		//Finish a partie, count score and duration 
+		global $result;
+		$result = Partie::finish($dbh, $_SESSION["usr"]);
+		if(!isset($result))
+			$_GET["do"] = "home";
 	}else if($_GET["do"] == "unsubscribe"){
-		unsubscribe($dbh);
+		//Unsubscribe: delete user account and redirect to index view
+		$_SESSION["usr"]->del($dbh);
 		$_GET["do"] = "disconnect";
 	}
 	
@@ -40,7 +70,13 @@
 			$categories = Categorie::get($dbh);
 			require 'view/creation.php';
 			break;
-		case "jeu": require 'view/jeu.php'; break;
+		case "jeu": 
+			global $questionnaire;
+			$partie->start($dbh, $_SESSION["usr"]);
+			$questionnaire = $partie->getQuestionnaire($dbh);
+			require 'view/jeu.php';
+			break;
+		case "finish": require 'view/finish.php'; break;
 		case "disconnect":
 			session_unset();
 			session_destroy();

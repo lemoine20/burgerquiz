@@ -3,15 +3,11 @@
 #------------------------------------------------------------
 
 
-DROP TABLE IF EXISTS Partie_Question;
-DROP TABLE IF EXISTS Effectue;
-DROP TABLE IF EXISTS Palmares_Partie;
-DROP TABLE IF EXISTS Utilisateur_Palmares;
-DROP TABLE IF EXISTS Reponse;
+DROP TABLE IF EXISTS Partie_Proposition;
+DROP TABLE IF EXISTS Partie_jouee;
+DROP TABLE IF EXISTS Partie;
 DROP TABLE IF EXISTS Proposition;
 DROP TABLE IF EXISTS Question;
-DROP TABLE IF EXISTS Partie;
-DROP TABLE IF EXISTS Palmares;
 DROP TABLE IF EXISTS Categorie;
 DROP TABLE IF EXISTS Utilisateur;
 
@@ -56,11 +52,11 @@ CREATE TABLE Partie(
 #------------------------------------------------------------
 
 CREATE TABLE Question(
-        id_categorie Int NOT NULL ,
-        id_question  Int NOT NULL ,
+        id_question  Int  Auto_increment  NOT NULL ,
         label1       Varchar (50) NOT NULL ,
-        label2       Varchar (50) NOT NULL
-    ,CONSTRAINT Question_PK PRIMARY KEY (id_categorie,id_question)
+        label2       Varchar (50) NOT NULL ,
+        id_categorie Int NOT NULL
+    ,CONSTRAINT Question_PK PRIMARY KEY (id_question)
 
     ,CONSTRAINT Question_Categorie_FK FOREIGN KEY (id_categorie) REFERENCES Categorie(id_categorie)
 )ENGINE=InnoDB;
@@ -71,62 +67,248 @@ CREATE TABLE Question(
 #------------------------------------------------------------
 
 CREATE TABLE Proposition(
-        id_categorie    Int NOT NULL ,
-        id_question     Int NOT NULL ,
-        id_proposition  Int NOT NULL ,
-        nom_proposition Varchar (50) NOT NULL
-    ,CONSTRAINT Proposition_PK PRIMARY KEY (id_categorie,id_question,id_proposition)
+        id_proposition  Int  Auto_increment  NOT NULL ,
+        nom_proposition Varchar (50) NOT NULL ,
+        reponse         Int NOT NULL ,
+        id_question     Int NOT NULL
+    ,CONSTRAINT Proposition_PK PRIMARY KEY (id_proposition)
 
-    ,CONSTRAINT Proposition_Question_FK FOREIGN KEY (id_categorie,id_question) REFERENCES Question(id_categorie,id_question)
+    ,CONSTRAINT Proposition_Question_FK FOREIGN KEY (id_question) REFERENCES Question(id_question)
 )ENGINE=InnoDB;
 
 
 #------------------------------------------------------------
-# Table: Reponse
+# Table: Partie_jouee
 #------------------------------------------------------------
 
-CREATE TABLE Reponse(
-        id_categorie   Int NOT NULL ,
-        id_question    Int NOT NULL ,
-        id_proposition Int NOT NULL ,
-        id_reponse     Int NOT NULL ,
-        nom_reponse    Varchar (50) NOT NULL
-    ,CONSTRAINT Reponse_PK PRIMARY KEY (id_categorie,id_question,id_proposition,id_reponse)
+CREATE TABLE Partie_jouee(
+        id_user      Int NOT NULL ,
+        id_partie    Int NOT NULL ,
+        Temps        Time NOT NULL ,
+        Score        Int NOT NULL ,
+        Heure_depart Datetime NOT NULL
+    ,CONSTRAINT Partie_jouee_PK PRIMARY KEY (id_user,id_partie)
 
-    ,CONSTRAINT Reponse_Proposition_FK FOREIGN KEY (id_categorie,id_question,id_proposition) REFERENCES Proposition(id_categorie,id_question,id_proposition)
+    ,CONSTRAINT Partie_jouee_Utilisateur_FK FOREIGN KEY (id_user) REFERENCES Utilisateur(id_user)
+    ,CONSTRAINT Partie_jouee_Partie0_FK FOREIGN KEY (id_partie) REFERENCES Partie(id_partie)
 )ENGINE=InnoDB;
 
 
 #------------------------------------------------------------
-# Table: Partie_joue
+# Table: Partie_Proposition
 #------------------------------------------------------------
 
-CREATE TABLE Partie_joue(
-        id_user   Int NOT NULL ,
-        id_partie Int NOT NULL ,
-        Temps     Time NOT NULL ,
-        Score     Int NOT NULL
-    ,CONSTRAINT Partie_joue_PK PRIMARY KEY (id_user,id_partie)
-
-    ,CONSTRAINT Partie_joue_Utilisateur_FK FOREIGN KEY (id_user) REFERENCES Utilisateur(id_user)
-    ,CONSTRAINT Partie_joue_Partie0_FK FOREIGN KEY (id_partie) REFERENCES Partie(id_partie)
-)ENGINE=InnoDB;
-
-
-#------------------------------------------------------------
-# Table: Partie_Question
-#------------------------------------------------------------
-
-CREATE TABLE Partie_Question(
-        id_categorie   Int NOT NULL ,
-        id_question    Int NOT NULL ,
+CREATE TABLE Partie_Proposition(
         id_proposition Int NOT NULL ,
         id_partie      Int NOT NULL
-    ,CONSTRAINT Partie_Question_PK PRIMARY KEY (id_categorie,id_question,id_proposition,id_partie)
+    ,CONSTRAINT Partie_Proposition_PK PRIMARY KEY (id_proposition,id_partie)
 
-    ,CONSTRAINT Partie_Question_Proposition_FK FOREIGN KEY (id_categorie,id_question,id_proposition) REFERENCES Proposition(id_categorie,id_question,id_proposition)
-    ,CONSTRAINT Partie_Question_Partie0_FK FOREIGN KEY (id_partie) REFERENCES Partie(id_partie)
+    ,CONSTRAINT Partie_Proposition_Proposition_FK FOREIGN KEY (id_proposition) REFERENCES Proposition(id_proposition)
+    ,CONSTRAINT Partie_Proposition_Partie0_FK FOREIGN KEY (id_partie) REFERENCES Partie(id_partie)
 )ENGINE=InnoDB;
 
+--
+-- Contenu de la table `Categorie`
+--
 
+INSERT INTO `Categorie` (`id_categorie`, `nom_categorie`) VALUES
+(1, 'TELEVISION'),
+(2, 'CINEMA'),
+(3, 'POLITIQUE'),
+(4, 'AUTRE'),
+(5, 'MUSIQUE');
 
+--
+-- Contenu de la table `Question`
+--
+
+INSERT INTO `Question` (`id_question`, `label1`, `label2`, `id_categorie`) VALUES
+(1, 'BERNARD PIVOT', 'UNE DENT SUR PIVOT', 1),
+(2, 'FOGIEL', 'ARDISSON', 1),
+(3, 'LA 2', 'LE 2', 1),
+(4, 'SANS AUCUN DOUTE', 'J\'AI UN DOUTE', 1),
+(5, 'BAFFIE', 'BUFFY', 1),
+(7, 'LOFT STORY 2', 'DES TOILETTES PUBLIQUES', 1),
+(8, 'FILM DE COWBOY', 'PAS FILM DE COWBOY', 2),
+(10, 'LUC BESSON', 'WINNIE L\'OURSON', 2),
+(11, 'J.C.VAN DAMME', 'UN HIPPOPOTAME', 2),
+(12, 'MICHEL-ANGE', 'MICKEY MOUSE', 2),
+(13, 'LES UNS', 'LES AUTRES', 2),
+(14, 'COULE', 'FLOTTE', 2),
+(15, 'OJ SIMPSON', 'HOMER SIMPSON', 2),
+(16, 'LA MOUCHE', 'LA MECHE', 2),
+(17, 'NELSON MONFORT', 'NELSON MANDELA', 3),
+(18, 'JEAN-MARIE LE PEN', 'UN CYCLOPE', 3),
+(19, 'DOMINIQUE STRAUSS-KAHN', 'GENGIS KAHN', 3),
+(20, 'JACQUES A DIT', 'JACQUES A PAS DIS', 3),
+(21, 'DIDIER SCHULLER', 'LUKE SKYWALKER', 3),
+(22, 'PIPE', 'CIGARE', 4),
+(23, 'PAIR', 'IMPAIR', 4),
+(24, 'P.C', 'P.Q', 4),
+(25, 'ROPLOPLO : GROS SEINS', 'RAPLAPLA : MORT', 4),
+(26, 'PLATOCHE', 'ZIZOU', 4),
+(27, 'EMANUELLE', 'SOEUR EMANUELLE', 4),
+(28, 'JESUS DE NAZARETH', 'JESUS', 4),
+(29, 'JOUEURNDU BAYERNE DE MUNICH', 'PROCES DE NUREMBERG', 4),
+(30, 'UNE FILLE', 'UN GARS', 4),
+(31, 'MUSICIEN', 'DICTATEUR', 5),
+(32, 'MYLENE FARMER', 'UNE VILAINE FERMIERE', 5),
+(33, 'CHANTEUR', 'TERRORISTE', 5);
+
+--
+-- Contenu de la table `Proposition`
+--
+
+INSERT INTO `Proposition` (`id_proposition`, `nom_proposition`, `reponse`, `id_question`) VALUES
+(1, 'CA COUTE SUPER CHER', 1, 1),
+(2, 'APPARU DANS LES ANNEES 30', 1, 1),
+(3, 'A SAUVER MON SOURIR', 2, 1),
+(4, 'PEUT SE BROSSER', 3, 1),
+(5, 'N\'A JAMAIS LU UN SEUL LIVRE', 2, 1),
+(6, 'ON NE PEUT PAS PLAIREA TOUT LE MONDE', 1, 2),
+(7, 'ILS PEUVENT PAS PLAIRE A TOUT LE MONDE', 3, 2),
+(8, 'Y\'A DE BONNES MEUFS DANS SON EMISSION', 2, 2),
+(9, '20 ANS DE PLUS', 2, 2),
+(10, 'EST EN DIRECT', 1, 2),
+(11, 'EST SORTI AU LOTO SAMEDI', 2, 3),
+(12, 'S\'APPELE FANCE2 AUJOURD\'HUI', 1, 3),
+(13, 'VOUS PREFEREREZ PAPA OU MAMAN', 3, 3),
+(14, 'UN DAMIER C\'EST NOIR OU BLANC', 3, 3),
+(15, 'CA VAUT 1 PLUS 1', 2, 3),
+(16, 'JULIEN COURBET', 1, 4),
+(17, 'MAYO VA GAGNER', 3, 4),
+(18, 'C\'EST SUR TF1', 1, 4),
+(19, 'STEEVIE DU LOFT A 160 DE QI', 2, 4),
+(20, 'LOANA EST VIERGE', 2, 4),
+(21, 'A POURFENDU DES VAMPIRES', 2, 5),
+(22, 'PORTAIT UN PERFECTO EN CUIR', 1, 5),
+(23, 'S\'EST TAPE ANGEL', 2, 5),
+(24, 'C\'EST VACHEMENT DROLE', 1, 5),
+(25, 'A FAIT DE LA PRISON A L\'AGE DE 5 ANS', 1, 5),
+(26, 'CA SENT JAMAIS TRES BON', 3, 7),
+(27, 'ON Y CROISE DES DROLE DE GENS', 3, 7),
+(28, 'C\'EST SOUVENT TRES GLOQUE', 3, 7),
+(29, 'Y A UNE FILLE QUI DANSE DU FLAMENCO', 1, 7),
+(30, 'Y A DES CROUTONS DE PAIN DANS LES URINOIR', 2, 7),
+(31, 'SPACE COWBOY', 2, 8),
+(32, 'RETOUR VERS LE FUTUR 3', 1, 8),
+(33, 'MACADAM COWBOY', 2, 8),
+(34, 'LES PETROLEUSES', 1, 8),
+(35, 'IMPITOYABLE', 1, 8),
+(36, 'IL A DEJA MIS LA TETE DANS UNE RUCHE', 3, 10),
+(37, 'IL EST POILU', 3, 10),
+(38, 'PASSE TOUT L\'HIVER A DORMIR', 2, 10),
+(39, 'IL TRAINE AVEC DES DAUPHINS', 1, 10),
+(40, 'A FETE L\'ANNIVERSAIREDE BOURRIQUET', 2, 10),
+(41, 'PEUT RESTER DES HEURES SANS DIRE DES CONNERIES', 2, 11),
+(42, 'A UN PAIN D\'EPICE A SON NOM', 1, 11),
+(43, 'A CONSTRUIT SA CARRIERE SUR UN GRAND ECART', 1, 11),
+(44, 'ON NE COMPREND PAS CE QU\'IL DIT', 3, 11),
+(45, 'IL EST SUPER LOURD', 3, 11),
+(46, 'AU DEBUT,IL AVAIT 5 DOIGTS', 3, 12),
+(47, 'IL A DE GRANDES OREILLES', 2, 12),
+(48, 'SON PREMIER NOM ETAIT MORTIMER', 2, 12),
+(49, 'SIL A TAGUE LE PLAFONDDE LA CHAPELLE SIXTINE', 1, 12),
+(50, 'MAIS PUISQUE JE VOUS DIS QUE C\'EST UNE SOURIS', 2, 12),
+(51, 'UN FILM AVEC NICOLE KIDMAN', 2, 13),
+(52, 'UN FILM DE CLAUDE LELOUCH', 3, 13),
+(53, 'C\'EST TOUJOURS DE LEUR FAUTE', 2, 13),
+(54, 'ATTILA ETAIT LEUR CHEF', 1, 13),
+(55, 'LES MECHANTS DANS LOST', 2, 13),
+(56, 'LE NORWAY','2',14),
+(57, 'LE TITANIC','1',14),
+(58, 'AMOCO CADIZ','1',14),
+(59, 'COOL,YEAH LE QUEEN ELIZABETH', '2',14),
+(60, 'JAY EST SON DEUXIEME PRENOM', '2', 15),
+(61, 'A EU GEORGES BUSH COMME VOISIN', '2', 15),
+(62, 'A ETE ACCUSE D\'HARCELEMENT SEXUEL', '2', 15),
+(63, 'SON PERE S\'APPELLE MATT', '2', 15),
+(64, 'LE CREATEUR DE LA SERIE A JOUE DANS Y A T-IL UN FLIC POUR SAUVER LA REINE' ,'1', 15),
+(65, 'UN FILM DE DAVID KRONENBERG', '1', 16),
+(66, 'AIME BIEN LA MERDE', '1', 16),
+(67, 'ON PEUT L\'ENCULER', '1', 16),
+(68, 'ON PEUT LA VENDRE', '2', 16),
+(69, 'ON NE PEUT PAS L\'ATTRAPER AVEC DU VINAIGRE' ,'3', 16),
+(70, 'IL EST BILINGUE', '3', 17),
+(71, 'L\'HISTOIRE  RETIENDRA SON NOM', '2', 17),
+(72, 'A DISCUTER EN TETE A TETE AVEC CLINTON', '2', 17),
+(73, 'A DISCUTE EN TETE A TETE AVEC CANDELORO', '1', 17),
+(74, 'LE GROUPE SIMPLE MINDS A ECRIT UNE CHANSON POUR LUI', '2', 17),
+(75, 'IL N\'A QU\'UN OEIL', '3', 18),
+(76, 'C\'EST UN MONSTRE', '3', 18),
+(77, 'ULYSSE LUI A FERME SA GUEULE', '2', 18),
+(78, 'TOUT LE MONDE A VU SON EX-FEMME A POIL', '1', 18),
+(79, 'A PROMULGUER UNE LOI INTERDISANT D\'URINER EN PUBLIC', '2', 19),
+(80, 'S\'EST FAIT UNE BONNE PETITE REPUTATION A SARCELLES', '1', 19),
+(81, 'S\'EST FAIT UNE BONNE PETITE REPUTATION DU PACIFIQUE A L\'UKRAINE', '2', 19),
+(82, 'A KIDNAPPE SA FUTUR EPOUSE ET A FAIT TRANCHE LA TETE DE SON EPOUX', '2', 19),
+(83, 'A RENCONTRE SA FEMME SUR UN PLATEAU DE TELEVISION', '1', 19),
+(84, 'J\'VAIS ME BAIGNER DANS LA SEINE', '1', 20),
+(85, 'LES ETRANGERS PUENT ET SONT BRUYANTS', '1', 20),
+(86, 'J\'AI AI RENCONTRE LE PEN EN 88', '2', 20),
+(87, 'VOUS N\'AVEZ PAS LE MONOPOLE DU COEUR, MONSIEUR MITTERAND', '2', 20),
+(88, 'J\' ME TAPERAIS BIEN LAETITIA CASTA', '2', 20),
+(89, 'A ETE TRAHI PAR SON FILS', '1', 21),
+(90, 'A DU FUIR SON PAYS D\'ORIGINE', '3', 21),
+(91, 'EST PASSE DU COTE OBSCUR DE LA FORCE', '1', 21),
+(92, 'UNE MENACE POUR LE POUVOIR', '3', 21),
+(93, 'SE BAT AVEC DES TUBES FLUORESCENTS', '2', 21),
+(94, 'MAIGRET', '1', 22),
+(95, 'COLOMBO', '2', 22),
+(96, 'FIDEL CASTRO', '2', 22),
+(97, 'ON PEUT LA BOURER', '1', 22),
+(98, 'LES 7 NAINS', '2', 23),
+(99, 'ZERO', '1', 23),
+(100, 'LES TOURS DU WORLD TRADE CENTER', '3', 23),
+(101, 'PAIR AU DEBUT,PUIS IMPAIR PENDANT 10 MINUTES,PUIS PAIR FINALEMENT(PUISQUE 0) 2600 DIVISE PAR 100','1', 23),
+(102, 'COLOMBO', '2', 23),
+(103, 'CERTAINS Y ONT CRU', '1',24),
+(104, 'ON A BESOINS DE LUI TOUS LES JOUR','2',24),
+(105, 'DANS LES GOULAS Y \'EN AVAIT PAS.', '2', 24),
+(106, 'DES FOIS CA RESTE COLLE SOUS TA CHAUSSURE','2' , 24),
+(107, 'ILLEGAL EN AMERIQUE AUNE EPOQUE','1', 24),
+(108, 'SAMANTHA FOX', '1', 25),
+(109, 'AYRTON SENNA', '2', 25),
+(110, 'OPHELIE WINTER', '1', 25),
+(111, 'MARYLIN MONROE', '3', 25),
+(112, 'EDITH PIAF', '2', 25),
+(113, 'A EU LE DROIT DE PORTER LE NUMERO 10 ALA JUVE', '1', 26),
+(114, 'D\'ABORD LA JAMBE GAUCHE', '2', 26),
+(115, 'A PRIS 40KG DEPUIS SADERNIERE COUPE DU MONDE', '1', 26),
+(116, 'A GAGNE LA COUPE DU MONDE','2', 26),
+(117, 'A ETE 3 FOIS BALLON D\'OR','1', 26),
+(118, 'A FAIT VOEU DE CHASTETE', '2', 27),
+(119, 'A FAIT UN CARTON AU CINEMA', '1', 27),
+(120, 'EST BANDANTE', '1', 27),
+(121, 'N\'A PAS SA LANGUE DANS SA POCHE','3', 27),
+(122, 'A EU DES EXPERIENCES HOMOSEXUELLES', '1', 27),
+(123, 'T\'ES NAZE, ARRETE MON PERE C\'EST DIEU!', '1', 28),
+(124, 'JE VIVERAI 100 ANS', '2', 28),
+(125, 'JE SUIS SCIENTOLOGUE!','2', 28),
+(126, 'JE PEUX OUVRIR UNE BOULANGERIE EN MULTIPLIANT LES PAINS','1', 28),
+(127, 'MA VIE C\'EST LA CROIXET LA BANNIERE!', '2', 28),
+(128, 'HERMAN GOERING', '2', 29),
+(129, 'FRANZ BECKENBAUER', '1', 29),
+(130, 'OTTMAR HITZFELD', '1', 29),
+(131, 'RUDOLF HESS', '2', 29),
+(132, 'CARSTEN JANCKER', '1', 29),
+(133, 'UN ESCARGOT', '3', 30),
+(134, 'NILDA FERNANDEZ', '1', 30),
+(135, 'GEORGE SAND', '2', 30),
+(136, 'GERMAINE JACKSON','1', 30),
+(137, 'VICTOR LAZLO','2', 30),
+(138, 'COMPAY SEGUNDO', '1', 31),
+(139, 'JORGE RAFAEL VIDELA', '2', 31),
+(140, 'RAY BARETO', '1', 31),
+(141, 'FULGENCIO BATISTA', '2', 31),
+(142, 'FERDINAND MARCOS', '2', 31),
+(143, 'LES HOMOSEXUELS ADORENT', '1', 32),
+(144, 'LES FERMIERS DETESTENT', '2', 32),
+(145, 'A EPOUSE UN BOUTONNEUX', '2', 32),
+(146, 'A EPOUSE BOUTONNAT', '1', 32),
+(147, 'S\'APPELLE MARIE- HELENE GAUTHIER', '1',32),
+(148, 'BEN HARPER', '1', 33),
+(149, 'BEN LADEN', '2', 33),
+(150, 'PATRICK FIORI', '1', 33),
+(151, 'LA BANDE A BASILE', '1', 33),
+(152, 'LA BANDE A BADER', '2', 33);

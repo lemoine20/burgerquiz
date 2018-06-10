@@ -1,12 +1,6 @@
 <?php
 class Proposition {
 	private $id, $id_question, $nom, $reponse;
-	private function __construct($id, $id_question, $nom, $reponse){
-		$this->id = $id;
-		$this->id_question = $id_question;
-		$this->nom = $nom;
-		$this->reponse = $reponse;
-	}
 	
 	public function getId(){
 		return $this->id;
@@ -18,7 +12,7 @@ class Proposition {
 		return $this->reponse;
 	}
 	public function getQuestion($dbh){
-		return Question::get($dbh, $id_question);
+		return Question::get($dbh, $this->id_question)[0];
 	}
 	
 	public static function get($dbh, $id = NULL, $id_question = NULL){
@@ -34,13 +28,11 @@ class Proposition {
 		if(isset($id_question))	$q->bindValue(':id_question', $id_question, PDO::PARAM_INT);
 		//Execute querry
 		$q->execute();
-		$result = $q->fetchAll();
-		//var_dump($result);
-		//Retrieve data into an array of objects 
-		$propositions = array();
-		foreach ($result as $k => $proposition)
-			array_push($propositions,new Proposition($proposition["id"], $proposition["id_question"], $proposition["nom"], $proposition["reponse"]));
-		return $propositions;
+		return $q->fetchAll(PDO::FETCH_CLASS, "Proposition");
+	}
+	public static function generate($dbh, $question, $compte = 3){
+		$questions = $question->getPropositions($dbh);
+		shuffle($questions);
+		return array_slice($questions, 0, $compte);
 	}
 }
-?>

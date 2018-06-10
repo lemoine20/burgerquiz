@@ -19,15 +19,15 @@
 				</a>
 			</div>
 		</div>
-		<form action="index.php?do=home" method="POST">
+		<form action="index.php?do=parametres" method="POST">
 			<table align="center">
 				<tr>
 					<td><label for="usr" class="red">Pseudo </label></td>
-					<td><input type="text" name="usr" value="<?php echo $_SESSION["usr"]->getNom();?>"></input></td>
+					<td><input type="text" name="nusr" value="<?php echo $_SESSION["usr"]->getNom();?>"></input></td>
 				</tr>
 				<tr>
 					<td><label for="pwd" class="yellow">Password </label></td>
-					<td><input type="password" name="pwd"></input></td>
+					<td><input type="password" name="npwd"></input></td>
 				</tr>
 				<tr>
 					<td colspan="2"><input type="submit" class="button bggreen" style="float:right;" value="Modifier"></td>

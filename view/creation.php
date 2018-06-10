@@ -19,17 +19,17 @@
 				</a>
 			</div>
 		</div>
-		<form action="inex.php?do=jeu" method="POST" style="text-align:center;">
+		<form action="index.php?do=jeu" method="POST" style="text-align:center;">
 			<div id="selector">
 				<p class="inv" style="font-size: 9vh;">Categorie: </p>
+				<input class="radio" type="radio" id="aleatoire" name="categorie" checked>
+				<label class="small" for="aleatoire">Aleatoire</label><br>
 				<?php
 					global $categories;
 					foreach ($categories as $k => $categorie){
 						$nom = $categorie->getNom();
-						echo '<p>';
-						echo '<input class="radio" type="radio" name="categorie" value="'.$nom.'" '.($k==0?'checked':'').'>';
-						echo '<label for="'.$nom.'">'.$nom.'</label><br>';
-						echo '</p>';
+						echo '<input class="radio" type="radio" id="radio'.$k.'" name="categorie" value="'.$nom.'">';
+						echo '<label class="small" for="radio'.$k.'">'.$nom.'</label><br>';
 					}
 				?>
 			</div>

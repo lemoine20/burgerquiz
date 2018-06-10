@@ -41,20 +41,27 @@
 .bgred {	background-color: #CA2F1E;}
 .green {	color: 			  #50CB1E;}
 .bggreen {	background-color: #50CB1E;}
+.orange {	color: 			  orange;}
 
 /* Default style */
 body {
 	background-color: black;
 }
 a {
+	color: white;
+	font-family:'Burger_Quiz';
 	text-decoration: none;
 }
-a, label, p, h1, h2, h3, h4, h5 {
+label, button, p, h1, h2, h3, h4, h5 {
 	color: white;
 	font-family:'Burger_Quiz';
 	margin: 0;
+	font-size: 9vh;
+	background: none;
+	text-align: center;
+	border: none;
 }
-label, input {
+input {
 	color: white;
 	background-color: black;
 	font-size: 9vh;
@@ -114,10 +121,17 @@ label{
 	text-align: center;
 	font-size: 15vh;
 }
+.tiny-title{
+	text-align: center;
+	font-size: 6vh;
+}
 .inline-title{
 	font-size: 20vh;
 	display: inline-block;
 	vertical-align: top;
+}
+.small{
+	font-size: 7vh;
 }
 
 /* Logo style */
@@ -159,6 +173,8 @@ label{
   width:6vh;
   height:6vh;
   border-radius:50%;
+  vertical-align: text-bottom;
+  margin-right: 5px;
 }
 .radio:checked{
   border:2vh solid #50CB1E;
@@ -174,6 +190,15 @@ label{
 #countdown {
 	text-align:center;
 	font-size:30vh;
-	color:red;
 	display:none;
+}
+#progress{
+	position:fixed;
+	left:0;
+	top;0;
+}
+#timer{
+	position:fixed;
+	right:0;
+	top;0;
 }

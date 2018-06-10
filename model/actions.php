@@ -1,9 +1,4 @@
 <?php
-	include "utilisateur.php";
-	include "categorie.php";
-	include "question.php";
-	include "proposition.php";
-	
 	function connect ($dbh, $usr, $pwd){
 		global $config;
 		$search = Utilisateur::get($dbh, NULL, $usr, hash_hmac("sha256",$pwd,$config["hashkey"]));
@@ -28,16 +23,9 @@
 		return false;
 	}
 	
-	function activate ($dbh, $code){
-		if($code < 1000 || $code > 9999)
-			return true;
-		if($_SESSION["usr"]->getCode() != $code)
-			return true;
-		$_SESSION["usr"]->activate($dbh);
-		return false;
-	}
-	
-	function unsubscribe ($dbh){
+	function modify ($dbh, $usr, $pwd){
 		$_SESSION["usr"]->del($dbh);
+		$_SESSION["usr"] = new Utilisateur(NULL, $usr, hash_hmac("sha256",$pwd,$config["hashkey"]), $_SESSION["usr"]->getMail(), 0);
+		$_SESSION["usr"]->ins($dbh);
 	}
 ?>

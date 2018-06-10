@@ -1,13 +1,10 @@
 <?php
 class Question {
 	private $id, $id_category, $label1, $label2;
-	private function __construct($id, $id_categorie, $label1, $label2){
-		$this->id = $id;
-		$this->id_categorie = $id_categorie;
-		$this->label1 = $label1;
-		$this->label2 = $label2;
-	}
 	
+	public function getId(){
+		return $this->id;
+	}
 	public function getLabel1(){
 		return $this->label1;
 	}
@@ -18,7 +15,7 @@ class Question {
 		return Categorie::get($dbh, $id_categorie);
 	}
 	public function getPropositions($dbh){
-		return Proposition::get($dbh, NULL, $id);
+		return Proposition::get($dbh, NULL, $this->id);
 	}
 	
 	public static function get($dbh, $id=NULL, $id_categorie=NULL){
@@ -33,13 +30,13 @@ class Question {
 		if(isset($id_categorie))	$q->bindValue(':categorie', $id_categorie, PDO::PARAM_INT);
 		//Execute querry
 		$q->execute();
-		$result = $q->fetchAll();
-		//var_dump($result);
-		//Retrieve data into an array of objects 
-		$questions = array();
-		foreach ($result as $k => $question)
-			array_push($questions,new Question($question["id"],$question["id_categorie"],$question["label1"],$question["label2"]));
-		return $questions;
+		return $q->fetchAll(PDO::FETCH_CLASS, "Question");
+	}
+	public static function generate($dbh, $categorie = NULL){
+		if(!isset($categorie))
+			$categorie = Categorie::generate($dbh);
+		$questions = $categorie->getQuestions($dbh);
+		shuffle($questions);
+		return array_slice($questions, 0, 3);
 	}
 }
-?>
