@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="connection">
      <widget class="QLabel" name="login">
@@ -66,7 +66,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>ADMINISTRATION DU BURGER QUIZ</string>
+       <string>TextLabel</string>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButton">
@@ -105,7 +105,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Connexion à la base de données</string>
+       <string>TextLabel</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="lineEdit_login">
@@ -131,7 +131,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Server name</string>
+       <string>nom serveur</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="lineEdit_name">
@@ -157,7 +157,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Server IP</string>
+       <string>servert Name</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="lineEdit_IP">
@@ -171,6 +171,45 @@
       </property>
       <property name="text">
        <string>localhost</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="port">
+      <property name="geometry">
+       <rect>
+        <x>460</x>
+        <y>90</y>
+        <width>51</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>3306</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_8">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>90</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>port</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_9">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>90</y>
+        <width>16</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>:</string>
       </property>
      </widget>
     </widget>
@@ -441,6 +480,19 @@
       </property>
       <property name="text">
        <string>3</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="Annuler">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>280</y>
+        <width>99</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Annuler</string>
       </property>
      </widget>
     </widget>

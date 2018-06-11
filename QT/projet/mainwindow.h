@@ -4,11 +4,23 @@
 #include <QMainWindow>
 #include <QWidget>
 #include <QtWidgets>
-#include <QtSql>
 #include <iostream>
 #include <QVector>
 
+
+#include <cppconn/driver.h>
+#include <cppconn/exception.h>
+#include <cppconn/resultset.h>
+#include <cppconn/prepared_statement.h>
+
+
+
 #define q2c(string) string.toStdString()
+
+
+using namespace std;
+using namespace sql;
+
 
 namespace Ui {
 class MainWindow;
@@ -22,7 +34,9 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    void affichageTree();
+
+void affichageTree(Connection* connection, PreparedStatement* statement = NULL, ResultSet* result = NULL);
+
 
 private slots:
         void on_Deconnexion_clicked();
@@ -35,9 +49,9 @@ private slots:
 
         void on_question_clicked();
 
-        void AddRoot(QString name, QString Description);
+        /*void AddRoot(QString name, QString Description);
 
-        void Addchild(QTreeWidgetItem * parent, QString name, QString Description);
+        void Addchild(QTreeWidgetItem * parent, QString name, QString Description);*/
 
 private:
     Ui::MainWindow *ui;
@@ -46,8 +60,8 @@ private:
     QWidget *Accueil;
     QWidget *Question;
     QVBoxLayout *layout;*/
-    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-    QSqlQuery categorie, question, proposition;
+    //QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+    //QSqlQuery categorie, question, proposition;
     QVector<QString> quest;
     QVector<QString> cat;
 
