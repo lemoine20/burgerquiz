@@ -1,4 +1,10 @@
 <?php
+/**
+ * \file index.php
+ * \brief Page d'accès au site (structure MVC2).
+ * \author Clément C.
+ */
+ 
 	if(!isset($_GET["do"]))
 		$_GET["do"] = "home";
 	$public_area = array("connect", "subscribe", "activate");

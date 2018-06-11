@@ -81,6 +81,15 @@ class Question {
 		$q->execute();
 		return $q->fetchAll(PDO::FETCH_CLASS, "Question");
 	}
+	
+/**
+ * \fn generate ($dbh, $question)
+ * \brief Méthode de tirage au sort de 3 questions.
+ *
+ * \param $dbh Object PDO de connexion à la base de donnée.
+ * \param $categorie Objet Categorie duquel les questions vont être tirés.
+ * \return Liste des objets Question tirés au sort.
+ */
 	public static function generate($dbh, $categorie = NULL){
 		if(!isset($categorie))
 			$categorie = Categorie::generate($dbh);

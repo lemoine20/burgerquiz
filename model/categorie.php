@@ -1,14 +1,44 @@
 <?php
+/**
+ * \file categorie.php
+ * \brief Classe categorie.
+ * \author Clément C.
+ */
+ 
+/**
+ * \class Categorie
+ * \brief Classe representant une categorie(/thème) de questions.
+ */
 class Categorie {
 	private $id, $nom;
-	
+/**
+ * \fn getNom ()
+ * \brief Getter de l'attribut $nom.
+ *
+ * \return Nom de la proposition.
+ */
 	public function getNom(){
 		return $this->nom;
 	}
+/**
+ * \fn getQuestions ($dbh)
+ * \brief Querry SQL des questions associés à cette categoie.
+ *
+ * \param $dbh Object PDO de connexion à la base de donnée.
+ * \return Liste d'objet Question correspondants.
+ */
 	public function getQuestions($dbh){
 		return Question::get($dbh, NULL, $this->id);
 	}
-	
+/**
+ * \fn get ($dbh, $id = NULL, $nom=NULL)
+ * \brief Querry SQL de categories.
+ *
+ * \param $dbh Object PDO de connexion à la base de donnée.
+ * \param $id Entier: Id de la categorie recherchée.
+ * \param $nom Nom de la categorie recherchée.
+ * \return Liste des objets Categorie trouvés dans la base de donnée.
+ */
 	public static function get($dbh, $id=NULL, $nom=NULL){
 		//Generate conditions
 		$conditions = "1 ";
@@ -24,6 +54,14 @@ class Categorie {
 		$q->execute();
 		return $q->fetchAll(PDO::FETCH_CLASS, "Categorie");
 	}
+	
+/**
+ * \fn generate ($dbh)
+ * \brief Méthode de tirage au sort de categorie.
+ *
+ * \param $dbh Object PDO de connexion à la base de donnée.
+ * \return Objet Categorie tiré au sort.
+ */
 	public static function generate($dbh){
 		$categories = Categorie::get($dbh);
 		return $categories[array_rand($categories)];

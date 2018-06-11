@@ -79,10 +79,10 @@ class Proposition {
 	
 /**
  * \fn generate ($dbh, $question, $compte = 3)
- * \brief Méthode de irage au sort de propostions.
+ * \brief Méthode de tirage au sort de propostions.
  *
  * \param $dbh Object PDO de connexion à la base de donnée.
- * \param $question Objet Question duquel les proposition vont être tirés.
+ * \param $question Objet Question duquel les propositions vont être tirés.
  * \param $compte Entier: nombre maximum de propositions tirés.
  * \return Liste des objets Proposition tirés au sort.
  */

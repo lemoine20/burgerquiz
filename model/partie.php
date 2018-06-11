@@ -1,5 +1,4 @@
 <?php
-//TODO: refactor
 class Partie {
 	private $id;
 	public function __construct($id = NULL){
