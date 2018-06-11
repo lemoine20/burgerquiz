@@ -1,6 +1,25 @@
 <?php
+/**
+ * \file utilisateur.php
+ * \brief Classe Utilisateur.
+ * \author Clément C.
+ */
+
+/**
+ * \class Utilisateur
+ * \brief Classe representant un compte utilisateur.
+ */
 class Utilisateur {
 	private $id, $nom, $mdp, $mail, $code;
+/**
+ * \fn __construct ($id, $nom, $mdp, $mail, $code = NULL)
+ * \brief Constructeur de la classe Utilisateur.
+ *
+ * \param $nom Pseudo de l'utilisateur.
+ * \param $mdp Mot de passe de l'utilisateur.
+ * \param $mail Adresse mail de l'utilisateur.
+ * \param $code Entier: code d'activation ([1000-9999] si non-activé, 0 si activé et -1 si banni).
+ */	
 	public function __construct($id, $nom, $mdp, $mail, $code = NULL) {
 		$this->id = $id;
 		$this->nom = $nom;
@@ -8,22 +27,60 @@ class Utilisateur {
 		$this->mail = $mail;
 		$this->code = isset($code) ? $code : rand(1000,9999);
 	}
-	
+/**
+ * \fn getId ()
+ * \brief Getter de l'attribut $id.
+ *
+ * \return Entier: Id de l'utilisateur.
+ */
 	public function getId(){
 		return $this->id;
 	}
+/**
+ * \fn getNom ()
+ * \brief Getter de l'attribut $nom.
+ *
+ * \return Pseudo de l'utilisateur.
+ */	
 	public function getNom(){
 		return $this->nom;
 	}
+/**
+ * \fn getMdp ()
+ * \brief Getter de l'attribut $mdp.
+ *
+ * \return Pseudo de l'utilisateur.
+ */	
 	public function getMdp(){
 		return $this->mdp;
 	}
+/**
+ * \fn getMail ()
+ * \brief Getter de l'attribut $mail.
+ *
+ * \return Adresse mail de l'utilisateur.
+ */	
 	public function getMail(){
 		return $this->mail;
 	}
+/**
+ * \fn getCode ()
+ * \brief Getter de l'attribut $code.
+ *
+ * \return Entier: Code d'activation de l'utilisateur.
+ */	
 	public function getCode(){
 		return $this->code;
 	}
+
+/**
+ * \fn activate ($dbh, $code)
+ * \brief Méthode d'activation du compte utilisateur.
+ * Active le compte utilisateur après avoir vérifié que le code d'activation est bon.
+ * \param $dbh Object PDO de connexion à la base de donnée.
+ * \param $code Entier: code d'activation .
+ * \return Booléan: Booléan true si l'activation a échoué et false is elle a réussit.
+ */	
 	public function activate($dbh, $code){
 		if($code < 1000 || $code > 9999)
 			return true;
@@ -38,7 +95,11 @@ class Utilisateur {
 		$q->execute();
 		return false;
 	}
-	
+/**
+ * \fn ins ($dbh)
+ * \brief Insère l'objet utilisateur dans la base de donnée.
+ * \param $dbh Object PDO de connexion à la base de donnée.
+ */	
 	public function ins($dbh) {
 		//Prepare querry
 		$q = $dbh->prepare("INSERT INTO `Utilisateur` (`nom`, `mots_de_passe`, `mail`, `code_d_activation`) 
@@ -53,6 +114,11 @@ class Utilisateur {
 		//Save id
 		$this->id = $dbh->lastInsertId();
 	}
+/**
+ * \fn del ($dbh)
+ * \brief Supprime l'utilisateur de la base de donnée.
+ * \param $dbh Object PDO de connexion à la base de donnée.
+ */	
 	public function del($dbh) {
 		//Prepare querry
 		$q = $dbh->prepare("DELETE FROM `Partie_Jouee` WHERE id_user = :id ;DELETE FROM `Utilisateur` WHERE id_user = :id ;");			
@@ -61,7 +127,17 @@ class Utilisateur {
 		//Execute
 		$q->execute();
 	}
-	
+/**
+ * \fn get ($dbh, $id=NULL, $nom=NULL, $mdp=NULL, $mail=NULL, $code=NULL)
+ * \brief Querry SQL de utilisateur.
+ *
+ * \param $dbh Object PDO de connexion à la base de donnée.
+ * \param $id Entier: Id de l'utilisateur recherché.
+ * \param $nom Pseudo de l'utilisateur recherché.
+ * \param $mdp Mot de Passe hashé de l'utilisateur recherché.
+ * \param $code Entier: code d'activation de l'utilisateur recherché.
+ * \return Liste des objets Utilisateur trouvés dans la base de donnée.
+ */
 	public static function get($dbh, $id=NULL, $nom=NULL, $mdp=NULL, $mail=NULL, $code=NULL) {
 		//Generate conditions
 		$conditions = "1 ";
