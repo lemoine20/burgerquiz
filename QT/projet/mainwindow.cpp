@@ -112,13 +112,19 @@ void MainWindow::affichageTree(Connection* connection, PreparedStatement* statem
     PreparedStatement* quesNom;
     ResultSet* quesNo;
 
-    /*PreparedStatement* catNom;
-    ResultSet* catNo;*/
+    PreparedStatement* quesstat;
+    ResultSet* quesres;
+
+    PreparedStatement* propNom;
+    ResultSet* propNo;
+
+    PreparedStatement* propstat;
+    ResultSet* propres;
 
     catNom = connection->prepareStatement("SELECT id_categorie FROM Categorie ORDER BY id_categorie DESC LIMIT 1");
     catNo = catNom->executeQuery();
     catNo->next();
-    std::cout<<catNo->getInt("id_categorie");
+   // std::cout<<catNo->getInt("id_categorie");
     for(int i = 1; i < catNo->getInt("id_categorie"); ++i){
         result->next();
 
@@ -133,21 +139,49 @@ void MainWindow::affichageTree(Connection* connection, PreparedStatement* statem
 
         quesNo = quesNom->executeQuery();
         quesNo->next();
-        std::cout<<quesNo->getInt(1);
+        //std::cout<<quesNo->getInt(1);
 
         /*int quesNo = question.record().indexOf("id_question");
         QFileSystemModel *model = new QFileSystemModel;
            model->setRootPath(QDir::currentPath());*/
+        quesstat = connection->prepareStatement("SELECT * FROM Question WHERE id_categorie=?");
+        quesstat->setInt(1, i);
+
+        quesres = quesstat->executeQuery();
+
+        for(int j = 1; j<(quesNo->getInt(1)); ++j){
 
 
-        for(unsigned j = 1; j<quesNo->getInt(1); ++j){
-           /* quest<<question.value(i).toString();*/
-            /*proposition.prepare("SELECT * FROM Proposition WHERE id_question = quesNo;");
-            proposition.exec();*/
-            //int propNo = proposition.record().indexOf("id_proposition");
+            quesres->next();
 
-            //for(unsigned k = 0; k=quesNo; ++k)
+//            std::cout<<quesres->getString("label1");
 
+
+            QTreeWidgetItem* qItem = new QTreeWidgetItem(mItem);
+            QString text = QString((quesres->getString("label1") + " : " + quesres->getString("label2")).asStdString().data());
+
+            qItem->setText(0, text);
+            ui->treeWidget->show();
+
+            propNom = connection->prepareStatement("SELECT count(*) FROM Proposition WHERE id_question=?");
+            propNom->setInt(1, j);
+            propNo = propNom->executeQuery();
+            propNo->next();
+
+
+            propstat = connection->prepareStatement("SELECT * FROM Proposition WHERE id_question=?");
+            propstat->setInt(1, j);
+
+            propres = propstat->executeQuery();
+
+            for(int k = 1; k<(propNo->getInt(1)); ++k){
+                propres -> next();
+                QTreeWidgetItem* pItem = new QTreeWidgetItem(qItem);
+                pItem->setText(0, QString(propres->getString("nom_proposition").asStdString().data()));
+                ui->treeWidget->show();
+                QTreeWidgetItem* rItem = new QTreeWidgetItem(pItem);
+                rItem->setText(0, QString(propres->getString("reponse").asStdString().data()));
+            }
        }
    }
 }
