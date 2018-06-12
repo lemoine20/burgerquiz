@@ -37,6 +37,9 @@ public:
 
 void affichageTree(Connection* connection, PreparedStatement* statement = NULL, ResultSet* result = NULL);
 
+void AddQBdd(int cat,QString Question1, QString Question2, QString Prop1, QString R1, QString Prop2, QString R2, QString Prop3, QString R3);
+
+void readtree();
 
 private slots:
         void on_Deconnexion_clicked();
@@ -49,23 +52,52 @@ private slots:
 
         void on_question_clicked();
 
-        /*void AddRoot(QString name, QString Description);
 
-        void Addchild(QTreeWidgetItem * parent, QString name, QString Description);*/
+
+        void on_categorie_clicked();
+
+        void on_Confirmer_cat_clicked();
+
+        void on_Annuler_cat_clicked();
 
 private:
     Ui::MainWindow *ui;
     QMessageBox Alerte;
-    /*QWidget *Connection;
-    QWidget *Accueil;
-    QWidget *Question;
-    QVBoxLayout *layout;*/
-    //QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-    //QSqlQuery categorie, question, proposition;
-    QVector<QString> quest;
-    QVector<QString> cat;
-
     QTreeWidgetItem* mItem;
+    Driver* driver;
+    Connection* connection;
+    PreparedStatement* catNom;
+    ResultSet* catNo;
+    PreparedStatement* quesNom;
+    ResultSet* quesNo;
+
+    PreparedStatement* quesMin;
+    ResultSet* quesMi;
+
+    PreparedStatement* quesstat;
+    ResultSet* quesres;
+
+    PreparedStatement* propNom;
+    ResultSet* propNo;
+
+    PreparedStatement* propstat;
+    ResultSet* propres;
+
+    PreparedStatement* statement = NULL;
+    ResultSet* result = NULL;
+
+    PreparedStatement* addqstatement = NULL;
+    ResultSet* addqresult = NULL;
+
+    PreparedStatement* idstatement = NULL;
+    ResultSet* idresult = NULL;
+
+    PreparedStatement* addpstatement = NULL;
+    ResultSet* addpresult = NULL;
+
+    PreparedStatement* addcstatement = NULL;
+    ResultSet* addcresult = NULL;
+
 };
 
 #endif // MAINWINDOW_H
