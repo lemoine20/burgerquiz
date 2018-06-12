@@ -1,5 +1,6 @@
 <head>
 	<meta charset="utf-8">
+	<link rel="icon" href="res/favicon.ico" type="image/x-icon"/>
 	<!--<meta name="viewport" content="width=device-width, initial-scale=1"/>-->
 	
 	<title>Burger Quiz Online</title>

@@ -2,7 +2,7 @@
 <html>
 	<?php include "view/head.php";?>
 	<body>
-		<div style="margin-bottom:20vh;">
+		<div style="margin-bottom:10vh;">
 			<a href="index.php?do=home">
 				<img id="logo-small" src="res/logo.svg" alt="Burger Quiz en ligne">
 			</a>
@@ -19,6 +19,20 @@
 				</a>
 			</div>
 		</div>
+		
+		<button onclick="document.getElementById('modal').style.display='block'"
+				class="button small-button bgred">Se desinscrire</button>
+		<div id="modal">
+			<div id="modal-content">
+				<button onclick="document.getElementById('modal').style.display='none'"
+						class="small-button">&times;</button>
+				<p>Voullez-vous vraiment vous desinscrire ?</p>
+				<form action="index.php?do=unsubscribe" method="POST">
+					<input type="submit" class="button bgred" value="Se desinscrire">
+				</form>
+			</div>
+		</div>
+		
 		<form action="index.php?do=parametres" method="POST">
 			<table align="center">
 				<tr>

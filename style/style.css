@@ -52,7 +52,7 @@ a {
 	font-family:'Burger_Quiz';
 	text-decoration: none;
 }
-label, button, p, h1, h2, h3, h4, h5 {
+th, td, label, button, p, h1, h2, h3, h4, h5 {
 	color: white;
 	font-family:'Burger_Quiz';
 	margin: 0;
@@ -66,8 +66,21 @@ input {
 	background-color: black;
 	font-size: 9vh;
 }
-label{
+label {
 	margin-right: 10vh;
+}
+.scoreboard {
+	margin: auto;
+}
+.scoreboard td, .scoreboard th{
+	width: 18vw;
+	border: 2px solid white;
+}
+.scoreboard tr:first-child th:first-child {
+    border-top-left-radius: 60px;
+}
+.scoreboard tr:first-child th:last-child {
+    border-top-right-radius: 60px;
 }
 .button{
 	font-family:'Burger_Quiz';
@@ -133,6 +146,10 @@ label{
 .small{
 	font-size: 7vh;
 }
+.inline{
+	display: inline;
+	max-width: 20vw;
+}
 
 /* Logo style */
 #logo-big {
@@ -180,6 +197,42 @@ label{
   border:2vh solid #50CB1E;
 }
 
+/* Filter style */
+#minInput, #maxInput{
+	width: 15vh;
+	font-size: 6vh;
+}
+#pseudoInput, #themeInput{
+	width: 40vh;
+	font-size: 6vh;
+}
+select {
+	color: white;
+	background-color: black;
+	font-size: 6vh;
+	font-family:'Burger_Quiz';
+}
+
+/* Modal style */
+#modal{
+	display: none;
+	position: fixed;
+	background-color: rgba(0,0,0,0.8);
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+#modal-content{
+	margin: auto;
+	margin-top: 5vh;
+	position: relative;
+	padding: 0;
+	width: 60vw;
+	background-color: black;
+	border: 3px solid white;
+	text-align:right;
+}
 
 /* Game style */
 #intro {
