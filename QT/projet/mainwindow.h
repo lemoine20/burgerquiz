@@ -60,14 +60,21 @@ private slots:
 
         void on_Annuler_cat_clicked();
 
+        void on_proposition_clicked();
+
+        void on_Annuler_2_clicked();
+
 private:
     Ui::MainWindow *ui;
     QMessageBox Alerte;
     QTreeWidgetItem* mItem;
     Driver* driver;
+    QMessageBox succes;
+
     Connection* connection;
     PreparedStatement* catNom;
     ResultSet* catNo;
+
     PreparedStatement* quesNom;
     ResultSet* quesNo;
 

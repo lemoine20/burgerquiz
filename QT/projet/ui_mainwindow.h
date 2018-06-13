@@ -94,6 +94,33 @@ public:
     QLabel *label_11;
     QPushButton *Annuler_cat;
     QPushButton *Confirmer_cat;
+    QWidget *page_2;
+    QPushButton *confirmer;
+    QPushButton *Annuler_2;
+    QComboBox *comboBox_cat;
+    QComboBox *comboBox_quest;
+    QWidget *horizontalLayoutWidget_4;
+    QHBoxLayout *horizontalLayout_4;
+    QLineEdit *lineEdit;
+    QRadioButton *radioButton_10;
+    QRadioButton *radioButton_11;
+    QRadioButton *radioButton_12;
+    QWidget *horizontalLayoutWidget_5;
+    QHBoxLayout *horizontalLayout_5;
+    QLineEdit *lineEdit_2;
+    QRadioButton *radioButton_13;
+    QRadioButton *radioButton_14;
+    QRadioButton *radioButton_15;
+    QWidget *horizontalLayoutWidget_6;
+    QHBoxLayout *horizontalLayout_6;
+    QLineEdit *lineEdit_3;
+    QRadioButton *radioButton_17;
+    QRadioButton *radioButton_16;
+    QRadioButton *radioButton_18;
+    QLabel *label_12;
+    QLabel *label_13;
+    QLabel *label_14;
+    QLabel *label_15;
     QMenuBar *menuBar;
     QMenu *menuAdmin;
     QToolBar *mainToolBar;
@@ -317,6 +344,117 @@ public:
         Confirmer_cat->setObjectName(QStringLiteral("Confirmer_cat"));
         Confirmer_cat->setGeometry(QRect(300, 290, 99, 27));
         stackedWidget->addWidget(page);
+        page_2 = new QWidget();
+        page_2->setObjectName(QStringLiteral("page_2"));
+        confirmer = new QPushButton(page_2);
+        confirmer->setObjectName(QStringLiteral("confirmer"));
+        confirmer->setGeometry(QRect(400, 300, 99, 27));
+        Annuler_2 = new QPushButton(page_2);
+        Annuler_2->setObjectName(QStringLiteral("Annuler_2"));
+        Annuler_2->setGeometry(QRect(140, 300, 99, 27));
+        comboBox_cat = new QComboBox(page_2);
+        comboBox_cat->setObjectName(QStringLiteral("comboBox_cat"));
+        comboBox_cat->setGeometry(QRect(334, 70, 131, 27));
+        comboBox_quest = new QComboBox(page_2);
+        comboBox_quest->setObjectName(QStringLiteral("comboBox_quest"));
+        comboBox_quest->setGeometry(QRect(334, 120, 131, 27));
+        horizontalLayoutWidget_4 = new QWidget(page_2);
+        horizontalLayoutWidget_4->setObjectName(QStringLiteral("horizontalLayoutWidget_4"));
+        horizontalLayoutWidget_4->setGeometry(QRect(240, 170, 321, 31));
+        horizontalLayout_4 = new QHBoxLayout(horizontalLayoutWidget_4);
+        horizontalLayout_4->setSpacing(6);
+        horizontalLayout_4->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
+        lineEdit = new QLineEdit(horizontalLayoutWidget_4);
+        lineEdit->setObjectName(QStringLiteral("lineEdit"));
+
+        horizontalLayout_4->addWidget(lineEdit);
+
+        radioButton_10 = new QRadioButton(horizontalLayoutWidget_4);
+        radioButton_10->setObjectName(QStringLiteral("radioButton_10"));
+
+        horizontalLayout_4->addWidget(radioButton_10);
+
+        radioButton_11 = new QRadioButton(horizontalLayoutWidget_4);
+        radioButton_11->setObjectName(QStringLiteral("radioButton_11"));
+
+        horizontalLayout_4->addWidget(radioButton_11);
+
+        radioButton_12 = new QRadioButton(horizontalLayoutWidget_4);
+        radioButton_12->setObjectName(QStringLiteral("radioButton_12"));
+
+        horizontalLayout_4->addWidget(radioButton_12);
+
+        horizontalLayoutWidget_5 = new QWidget(page_2);
+        horizontalLayoutWidget_5->setObjectName(QStringLiteral("horizontalLayoutWidget_5"));
+        horizontalLayoutWidget_5->setGeometry(QRect(240, 210, 321, 31));
+        horizontalLayout_5 = new QHBoxLayout(horizontalLayoutWidget_5);
+        horizontalLayout_5->setSpacing(6);
+        horizontalLayout_5->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
+        horizontalLayout_5->setContentsMargins(0, 0, 0, 0);
+        lineEdit_2 = new QLineEdit(horizontalLayoutWidget_5);
+        lineEdit_2->setObjectName(QStringLiteral("lineEdit_2"));
+
+        horizontalLayout_5->addWidget(lineEdit_2);
+
+        radioButton_13 = new QRadioButton(horizontalLayoutWidget_5);
+        radioButton_13->setObjectName(QStringLiteral("radioButton_13"));
+
+        horizontalLayout_5->addWidget(radioButton_13);
+
+        radioButton_14 = new QRadioButton(horizontalLayoutWidget_5);
+        radioButton_14->setObjectName(QStringLiteral("radioButton_14"));
+
+        horizontalLayout_5->addWidget(radioButton_14);
+
+        radioButton_15 = new QRadioButton(horizontalLayoutWidget_5);
+        radioButton_15->setObjectName(QStringLiteral("radioButton_15"));
+
+        horizontalLayout_5->addWidget(radioButton_15);
+
+        horizontalLayoutWidget_6 = new QWidget(page_2);
+        horizontalLayoutWidget_6->setObjectName(QStringLiteral("horizontalLayoutWidget_6"));
+        horizontalLayoutWidget_6->setGeometry(QRect(240, 250, 321, 31));
+        horizontalLayout_6 = new QHBoxLayout(horizontalLayoutWidget_6);
+        horizontalLayout_6->setSpacing(6);
+        horizontalLayout_6->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
+        horizontalLayout_6->setContentsMargins(0, 0, 0, 0);
+        lineEdit_3 = new QLineEdit(horizontalLayoutWidget_6);
+        lineEdit_3->setObjectName(QStringLiteral("lineEdit_3"));
+
+        horizontalLayout_6->addWidget(lineEdit_3);
+
+        radioButton_17 = new QRadioButton(horizontalLayoutWidget_6);
+        radioButton_17->setObjectName(QStringLiteral("radioButton_17"));
+
+        horizontalLayout_6->addWidget(radioButton_17);
+
+        radioButton_16 = new QRadioButton(horizontalLayoutWidget_6);
+        radioButton_16->setObjectName(QStringLiteral("radioButton_16"));
+
+        horizontalLayout_6->addWidget(radioButton_16);
+
+        radioButton_18 = new QRadioButton(horizontalLayoutWidget_6);
+        radioButton_18->setObjectName(QStringLiteral("radioButton_18"));
+
+        horizontalLayout_6->addWidget(radioButton_18);
+
+        label_12 = new QLabel(page_2);
+        label_12->setObjectName(QStringLiteral("label_12"));
+        label_12->setGeometry(QRect(220, 20, 121, 17));
+        label_13 = new QLabel(page_2);
+        label_13->setObjectName(QStringLiteral("label_13"));
+        label_13->setGeometry(QRect(70, 80, 111, 17));
+        label_14 = new QLabel(page_2);
+        label_14->setObjectName(QStringLiteral("label_14"));
+        label_14->setGeometry(QRect(70, 130, 111, 17));
+        label_15 = new QLabel(page_2);
+        label_15->setObjectName(QStringLiteral("label_15"));
+        label_15->setGeometry(QRect(70, 180, 121, 17));
+        stackedWidget->addWidget(page_2);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -335,7 +473,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(3);
+        stackedWidget->setCurrentIndex(4);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -384,6 +522,21 @@ public:
         label_11->setText(QApplication::translate("MainWindow", "Ajout Cat\303\251gorie", 0));
         Annuler_cat->setText(QApplication::translate("MainWindow", "Annuler", 0));
         Confirmer_cat->setText(QApplication::translate("MainWindow", "Confirmer", 0));
+        confirmer->setText(QApplication::translate("MainWindow", "confirmer", 0));
+        Annuler_2->setText(QApplication::translate("MainWindow", "Annuler", 0));
+        radioButton_10->setText(QApplication::translate("MainWindow", "1", 0));
+        radioButton_11->setText(QApplication::translate("MainWindow", "2", 0));
+        radioButton_12->setText(QApplication::translate("MainWindow", "3", 0));
+        radioButton_13->setText(QApplication::translate("MainWindow", "2", 0));
+        radioButton_14->setText(QApplication::translate("MainWindow", "3", 0));
+        radioButton_15->setText(QApplication::translate("MainWindow", "1", 0));
+        radioButton_17->setText(QApplication::translate("MainWindow", "3", 0));
+        radioButton_16->setText(QApplication::translate("MainWindow", "2", 0));
+        radioButton_18->setText(QApplication::translate("MainWindow", "1", 0));
+        label_12->setText(QApplication::translate("MainWindow", "Ajout proposition", 0));
+        label_13->setText(QApplication::translate("MainWindow", "Choix categorie", 0));
+        label_14->setText(QApplication::translate("MainWindow", "Choix Question", 0));
+        label_15->setText(QApplication::translate("MainWindow", "Ajout proposition", 0));
         menuAdmin->setTitle(QApplication::translate("MainWindow", "Fichier", 0));
     } // retranslateUi
 

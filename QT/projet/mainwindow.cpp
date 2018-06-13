@@ -32,8 +32,12 @@ MainWindow::~MainWindow()
 void MainWindow::on_Deconnexion_clicked()
 {
     // Diconnect.
+    delete catNom;
     delete connection;
     ui->stackedWidget->setCurrentIndex(0);// Accès a la page de connection
+
+    succes.setText("La déconnection est un succès");
+    succes.exec();
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -57,8 +61,6 @@ void MainWindow::on_pushButton_clicked()
                       result = NULL);
       }
 
-     /* // Diconnect.
-      delete connection;*/
     }
     catch (SQLException& e)
     {
@@ -164,12 +166,20 @@ void MainWindow::on_Confirmer_clicked(){
         readtree();
         ui->stackedWidget->setCurrentIndex(2);// Accès à la page d'accueil
 
+    }else{
+        Alerte.setText("Un champs n'est pas remplie");
+        Alerte.exec();
     }
 }
 
 void MainWindow::on_question_clicked()
 {
     ui->comboBox_categorie->clear();
+    ui->lineEdit_question_1->clear();
+    ui->lineEdit_question_2->clear();
+    ui->lineEdit_prop1->clear();
+    ui->lineEdit_prop2->clear();
+    ui->lineEdit_prop3->clear();
     statement = connection->prepareStatement("SELECT * FROM Categorie");
     result = statement->executeQuery();
     ui->stackedWidget->setCurrentIndex(1);// Accès à la page d'ajout de question
@@ -269,6 +279,7 @@ void MainWindow::AddQBdd(int cat,QString Question1, QString Question2, QString P
      idstatement = connection->prepareStatement("SELECT LAST_INSERT_ID() AS id_question");
      idresult = idstatement->executeQuery();
      idresult->next();
+     qDebug()<<"insert prop";
      addpstatement = connection->prepareStatement("INSERT INTO Proposition (nom_proposition, reponse,id_question) VALUES (?,?,?),(?,?,?),(?,?,?)");
      addpstatement->setInt(1, idresult->getInt(1));
      addpstatement->setString(2, Prop1.toUtf8().constData());
@@ -281,12 +292,14 @@ void MainWindow::AddQBdd(int cat,QString Question1, QString Question2, QString P
      addpstatement->setInt(9, R3.toInt());
      addpresult= statement->executeQuery();
      addpresult->next();
+     succes.setText("L'ajout est un succès");
+     succes.exec();
  }
 
 
 void MainWindow::on_categorie_clicked(){
      ui->stackedWidget->setCurrentIndex(3);// Accès à la page d'ajout de categorie
-
+    ui->lineEdit_ajoutCat->clear();
 }
 
 void MainWindow::on_Confirmer_cat_clicked()
@@ -309,8 +322,35 @@ void MainWindow::on_Annuler_cat_clicked()
 }
 
 void MainWindow::readtree(){
-    qDebug()<<2;
+    delete catNom;
+    delete connection;
 
+    ui->lineEdit_IP->setPlaceholderText(hostname);
+    ui->lineEdit_login->setPlaceholderText(username);
+    ui->lineEdit_name->setPlaceholderText(dbname);
+
+    try
+    {
+      driver = get_driver_instance();
+      connection = driver->connect(("tcp://" + ui->lineEdit_IP->text() + ":" +
+        ui->port->text()).toStdString(), ui->lineEdit_login->text().toStdString(),
+        ui->lineEdit_pwd->text().toStdString());
+      if (connection){
+            connection->setSchema(ui->lineEdit_name->text().toStdString());
+            ui->treeWidget->clear();
+              affichageTree(connection,
+                      statement = NULL,
+                      result = NULL);
+      }
+
+    }
+    catch (SQLException& e)
+    {
+      cout << "Error: " << e.what() << "." << endl;
+      return;
+    }
+
+    ui->treeWidget->clear();
     statement = connection->prepareStatement("SELECT * FROM Categorie");
     result = statement->executeQuery();
 
@@ -375,4 +415,53 @@ void MainWindow::readtree(){
             }
         }
     }
+}
+
+void MainWindow::on_proposition_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(4);
+    ui->comboBox_cat->clear();
+    ui->comboBox_quest->clear();
+    ui->lineEdit->clear();
+    ui->lineEdit_2->clear();
+    ui->lineEdit_3->clear();
+    statement = connection->prepareStatement("SELECT * FROM Categorie");
+    result = statement->executeQuery();
+
+    catNom = connection->prepareStatement("SELECT id_categorie FROM Categorie ORDER BY id_categorie DESC LIMIT 1");
+    catNo = catNom->executeQuery();
+    catNo->next();
+    for(int i = 1; i < catNo->getInt("id_categorie"); ++i){
+        result->next();
+        ui->comboBox_cat->addItem(QString((result->getString("nom_categorie")).asStdString().data()));
+        quesNom = connection->prepareStatement("SELECT count(*) FROM Question WHERE id_categorie=?");
+        quesNom->setInt(1, i);
+
+        quesNo = quesNom->executeQuery();
+        quesNo->next();
+
+        quesMin = connection->prepareStatement("SELECT id_question FROM Question WHERE id_categorie=? LIMIT 1");
+        quesMin->setInt(1, i);
+
+        quesMi = quesMin->executeQuery();
+        quesMi->next();
+
+        quesstat = connection->prepareStatement("SELECT * FROM Question WHERE id_categorie=?");
+        quesstat->setInt(1, i);
+
+        quesres = quesstat->executeQuery();
+
+        for (int j=quesMi->getInt(1); j<(quesNo->getInt(1)+quesMi->getInt(1)); j++){
+            quesres->next();
+            ui->comboBox_quest->clear();
+            QString text = QString (((quesres->getString("label1"))+ " : "+(quesres->getString("label2"))).asStdString().data());
+            ui->comboBox_quest->addItem(text);
+        }
+    }
+}
+
+void MainWindow::on_Annuler_2_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(2);
+    readtree();
 }
