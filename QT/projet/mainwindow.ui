@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="connection">
      <widget class="QLabel" name="login">
@@ -702,21 +702,21 @@
        <item>
         <widget class="QRadioButton" name="radioButton_13">
          <property name="text">
-          <string>2</string>
+          <string>1</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QRadioButton" name="radioButton_14">
          <property name="text">
-          <string>3</string>
+          <string>2</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QRadioButton" name="radioButton_15">
          <property name="text">
-          <string>1</string>
+          <string>3</string>
          </property>
         </widget>
        </item>
@@ -738,7 +738,7 @@
        <item>
         <widget class="QRadioButton" name="radioButton_17">
          <property name="text">
-          <string>3</string>
+          <string>1</string>
          </property>
         </widget>
        </item>
@@ -752,7 +752,7 @@
        <item>
         <widget class="QRadioButton" name="radioButton_18">
          <property name="text">
-          <string>1</string>
+          <string>3</string>
          </property>
         </widget>
        </item>

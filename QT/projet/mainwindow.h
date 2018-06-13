@@ -40,6 +40,7 @@ void affichageTree(Connection* connection, PreparedStatement* statement = NULL, 
 void AddQBdd(int cat,QString Question1, QString Question2, QString Prop1, QString R1, QString Prop2, QString R2, QString Prop3, QString R3);
 
 void readtree();
+void treeHeaderDoubleClick();
 
 private slots:
         void on_Deconnexion_clicked();
@@ -63,6 +64,12 @@ private slots:
         void on_proposition_clicked();
 
         void on_Annuler_2_clicked();
+
+        void on_comboBox_cat_currentIndexChanged(int current_index);
+
+        void on_confirmer_clicked();
+
+        void AddPBdd(QString text, QString response, int id_question);
 
 private:
     Ui::MainWindow *ui;

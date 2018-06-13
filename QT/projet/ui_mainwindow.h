@@ -527,12 +527,12 @@ public:
         radioButton_10->setText(QApplication::translate("MainWindow", "1", 0));
         radioButton_11->setText(QApplication::translate("MainWindow", "2", 0));
         radioButton_12->setText(QApplication::translate("MainWindow", "3", 0));
-        radioButton_13->setText(QApplication::translate("MainWindow", "2", 0));
-        radioButton_14->setText(QApplication::translate("MainWindow", "3", 0));
-        radioButton_15->setText(QApplication::translate("MainWindow", "1", 0));
-        radioButton_17->setText(QApplication::translate("MainWindow", "3", 0));
+        radioButton_13->setText(QApplication::translate("MainWindow", "1", 0));
+        radioButton_14->setText(QApplication::translate("MainWindow", "2", 0));
+        radioButton_15->setText(QApplication::translate("MainWindow", "3", 0));
+        radioButton_17->setText(QApplication::translate("MainWindow", "1", 0));
         radioButton_16->setText(QApplication::translate("MainWindow", "2", 0));
-        radioButton_18->setText(QApplication::translate("MainWindow", "1", 0));
+        radioButton_18->setText(QApplication::translate("MainWindow", "3", 0));
         label_12->setText(QApplication::translate("MainWindow", "Ajout proposition", 0));
         label_13->setText(QApplication::translate("MainWindow", "Choix categorie", 0));
         label_14->setText(QApplication::translate("MainWindow", "Choix Question", 0));
