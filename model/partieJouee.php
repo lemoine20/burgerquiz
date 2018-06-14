@@ -99,7 +99,8 @@ class PartieJouee{
 							AND partie_proposition.id_proposition = proposition.id_proposition
 							AND question.id_question = proposition.id_question
 							AND categorie.id_categorie = question.id_categorie".$conditions."
-							GROUP BY partie_jouee.id_user, partie_jouee.id_partie;");
+							GROUP BY partie_jouee.id_user, partie_jouee.id_partie
+							ORDER BY partie_jouee.score DESC, partie_jouee.temps ASC;");
 		//Bind values
 		if(isset($nom_user))				$q->bindValue(':nom_user', $nom_user, PDO::PARAM_STR);
 		if(isset($partie))					$q->bindValue(':id_partie', (int)$partie->getId(), PDO::PARAM_INT);

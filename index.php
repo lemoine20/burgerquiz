@@ -49,7 +49,13 @@
 		$categorie = Categorie::get($dbh, NULL, $_POST["categorie"]);
 		$categorie = sizeof($categorie) == 1 ? $categorie[0] : NULL;
 		$count = gettype($_POST["count"]) == "integer" ? $count : NULL;
-		if(!$partie->generate($dbh, $_POST["count"], $categorie)){
+		if(isset($_POST["count"]) && $_POST["count"] < 3){
+			$fail = "Le nombre de propositions par partie doit être supérieur à 2.";
+			$_GET["do"] = "creation";	
+		}else if(isset($_POST["count"]) && $_POST["count"] > 9){
+			$fail = "Le nombre de propositions par partie ne peut exceder 9.";
+			$_GET["do"] = "creation";	
+		}else if(!$partie->generate($dbh, $_POST["count"], $categorie)){
 			$fail = "Echec de la génération.";
 			$_GET["do"] = "creation";
 		}

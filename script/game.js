@@ -1,4 +1,4 @@
-var video = document.getElementById("intro");
+var video = document.getElementById("intro-game");
 var progress = document.getElementById("progress");
 var count = 0;
 var total = questions.length*(questions[0].length-2);
