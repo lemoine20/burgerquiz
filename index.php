@@ -50,7 +50,7 @@
 		$categorie = sizeof($categorie) == 1 ? $categorie[0] : NULL;
 		$count = gettype($_POST["count"]) == "integer" ? $count : NULL;
 		if(!$partie->generate($dbh, $_POST["count"], $categorie)){
-			$fail = true;
+			$fail = "Echec de la génération.";
 			$_GET["do"] = "creation";
 		}
 	}else if(isset($_GET["id_partie"])){
@@ -58,7 +58,7 @@
 		Partie::clear($dbh, $_SESSION["usr"]);
 		$partie = Partie::get($dbh, $_GET["id_partie"]);
 		if(!isset($partie) || sizeof($partie)!=1){
-			$fail = true;
+			$fail = "Erreur: partie innexistante.";
 			$_GET["do"] = "existante";
 		}else
 			$partie = $partie[0];
@@ -66,12 +66,38 @@
 		//Finish a partie, count score and duration 
 		global $result;
 		$result = Partie::finish($dbh, $_SESSION["usr"]);
-		if(!isset($result))
+		if(!isset($result)){
+			$fail = "Erreur dans la comptabilisation des points.";
 			$_GET["do"] = "home";
+		}
 	}else if($_GET["do"] == "unsubscribe"){
 		//Unsubscribe: delete user account and redirect to index view
 		$_SESSION["usr"]->del($dbh);
 		$_GET["do"] = "disconnect";
+	}
+	
+	if($_GET["do"] == "home" || $_GET["do"] == "existante"){
+		//Get and filter scoreboards
+		global $parties;
+		
+		if(!isset($_GET["filter"])) $_GET["filter"] = "";
+		if(!isset($_GET["pseudo"])) $_GET["pseudo"] = "";
+		if(!isset($_GET["theme"])) $_GET["theme"] = "";
+		
+		if($_GET["filter"]==="score" || $_GET["filter"]==="temps")
+			$parties = PartieJouee::get($dbh, NULL, NULL, NULL,
+				$_GET["filter"], $_GET["min"], $_GET["max"]);
+		else if($_GET["filter"]==="pseudo" || $_GET["filter"]==="theme")
+			$parties = PartieJouee::get($dbh, NULL, 
+				$_GET["filter"]==="pseudo"?$_GET["pseudo"]."%":NULL,
+				$_GET["filter"]==="theme"?$_GET["theme"]."%":NULL);
+		else
+			$parties = PartieJouee::get($dbh);
+		
+		if($_GET["filter"]!="rank"){
+			$_GET["min"] = "1";
+			$_GET["max"] = "10";
+		}
 	}
 	
 	switch($_GET["do"]){

@@ -9,5 +9,8 @@
 	<script>
 		if ((function (){ua=navigator.userAgent;var is_ie=ua.indexOf("MSIE ")>-1||ua.indexOf("Trident/") > -1;return is_ie;})())
 			alert("Incompatible with Internet Explorer.");
+		var fail = <?php echo '"'.$fail.'"'?>;
+		if(fail)
+			alert(fail);
 	</script>
 </head>

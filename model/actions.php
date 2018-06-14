@@ -18,7 +18,7 @@
 		global $config;
 		$search = Utilisateur::get($dbh, NULL, $usr, hash_hmac("sha256",$pwd,$config["hashkey"]));
 		if(sizeof($search) != 1)
-			return true;
+			return "Erreur de connexion";
 		$_SESSION["usr"] = $search[0];
 		return false;
 	}
@@ -36,10 +36,10 @@
 	function subscribe ($dbh, $usr, $pwd, $mail){
 		//Check same name
 		if(sizeof(Utilisateur::get($dbh, NULL, $usr, NULL, NULL, NULL)) != 0)
-			return true;
+			return "Un compte utilise déjà ce pseudo.";
 		//Check same mail
 		if(sizeof(Utilisateur::get($dbh, NULL, NULL, NULL, $mail, NULL)) != 0)
-			return true;
+			return "Un compte utilise déjà cette addresse mail.";
 		global $config;
 		$_SESSION["usr"] = new Utilisateur(NULL, $usr, hash_hmac("sha256",$pwd,$config["hashkey"]), $mail);
 		$_SESSION["usr"]->ins($dbh);

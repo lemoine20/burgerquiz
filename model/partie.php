@@ -54,7 +54,7 @@ class Partie {
 	}
 /**
  * \fn ins($dbh)
- * \brief Insère l'objet PartieJouee dans la base de donnée.
+ * \brief Insère l'objet Partie dans la base de donnée.
  * \param $dbh Objet PDO de connexion à la base de donnée.
  */	
 	private function ins($dbh){
@@ -67,7 +67,7 @@ class Partie {
 	}
 /**
  * \fn del ($dbh)
- * \brief Supprime l'objet PartieJouee de la base de donnée.
+ * \brief Supprime l'objet Partie de la base de donnée.
  * \param $dbh Objet PDO de connexion à la base de donnée.
  */	
 	public function del($dbh){

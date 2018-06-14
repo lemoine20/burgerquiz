@@ -84,9 +84,9 @@ class Utilisateur {
  */	
 	public function activate($dbh, $code){
 		if($code < 1000 || $code > 9999)
-			return true;
+			return "Code invalide (nombre à 4 chiffres)";
 		if($this->code != $code)
-			return true;
+			return "Code invalide";
 		$this->code = 0;
 		//Prepare querry
 		$q = $dbh->prepare("UPDATE `utilisateur` SET `code_d_activation` = 0 WHERE `id_user` = :id");

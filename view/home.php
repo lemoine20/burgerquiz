@@ -21,7 +21,8 @@
 			<a class="bggreen small-button grow" href="index.php?do=creation">Nouvelle Partie</a>
 		</div>
 		<div align="center" style="margin-top:3vh;">
-			<form role="form" method="get" action="index.php?do=home">
+			<form role="form" method="get" action="index.php">
+				<input hidden name="do" value="home">
 				<select id="filter" class="inline" name="filter">
 					<option value="pseudo" selected>Pseudo</option>
 					<option value="theme">Theme</option>
@@ -54,9 +55,10 @@
 				<th>Temps</th>
 			</tr>
 		<?php
-			$parties = PartieJouee::get($dbh);
 			foreach($parties as $i => $partie){
-				if($i == 10)
+				if($i+1 < $_GET["min"])
+					continue;
+				if($i+1 > $_GET["max"])
 					break;
 				echo "<tr>";
 				echo "<td>#".($i+1)."</td>";

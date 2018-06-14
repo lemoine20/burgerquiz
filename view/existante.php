@@ -19,19 +19,19 @@
 				</a>
 			</div>
 			<div align="center" style="margin-top:10vh;">
-				<form role="form" method="get" action="index.php?do=home">
+				<form role="form" method="get" action="index.php">
+					<input hidden name="do" value="existante">
 					<select id="filter" class="inline" name="filter">
 						<option value="theme" selected>Theme</option>
 						<option value="pseudo">Pseudo</option>
-						<option value="date">Date</option>
 						<option value="score">Score</option>
 						<option value="temps">Temps</option>
 					</select>
 					<div class="inline">
-						<input id="pseudoInput" type="text" name="pseudo" class="form-control" placeholder="Pseudo">
+						<input id="themeInput" type="text" name="theme" class="form-control" placeholder="Thème">
 					</div>
 					<div class="inline">
-						<input id="themeInput" style="display:none;" type="text" name="theme" class="form-control" placeholder="Thème">
+						<input id="pseudoInput" style="display:none;" type="text" name="pseudo" class="form-control" placeholder="Pseudo">
 					</div>
 					<div class="inline">
 						<input id="minInput" style="display:none;" type="text" name="min" class="form-control input-small" placeholder="min">
@@ -53,9 +53,10 @@
 					<th>Jouer</th>
 				</tr>
 				<?php
-					$parties = PartieJouee::get($dbh);
 					foreach($parties as $i => $partie){
-						if($i == 10)
+						if($i+1 < $_GET["min"])
+							continue;
+						if($i+1 > $_GET["max"])
 							break;
 						echo "<tr>";
 						echo "<td>".$partie->getDate()."</td>";
@@ -64,7 +65,7 @@
 						echo "<td>".$partie->getTemps()."</td>";
 						echo "<td>".$partie->getNomUtilisateur()."</td>";
 						echo '<td>';
-						if(sizeof(PartieJouee::get($dbh,$partie,$_SESSION["usr"])) === 1)
+						if(sizeof(PartieJouee::get($dbh,$partie,$_SESSION["usr"]->getNom())) === 0)
 							echo '<a class="small-button bggreen" href="index.php?do=jeu&id_partie='.$partie->getId().'">►</a>';
 						else
 							echo '✓';

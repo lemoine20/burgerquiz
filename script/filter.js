@@ -12,8 +12,15 @@ filter.onchange = ()=>{
 		pseudo.style.display = "inline";
 	else if(filter.value == "theme")
 		theme.style.display = "inline";
-	else if(filter.value == "rank" || filter.value == "score" || filter.value == "temps" || filter.value == "date"){
+	else if(filter.value == "rank" || filter.value == "score"){
 		min.style.display = "inline";
 		max.style.display = "inline";
+		min.style.width = "15vh";
+		max.style.width = "15vh";
+	}else if(filter.value == "temps"){
+		min.style.display = "inline";
+		max.style.display = "inline";
+		min.style.width = "31vh";
+		max.style.width = "31vh";
 	}
 };
