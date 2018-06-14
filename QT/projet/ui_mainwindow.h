@@ -13,7 +13,9 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QDialogButtonBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -25,6 +27,7 @@
 #include <QtWidgets/QRadioButton>
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTabWidget>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QTreeWidget>
 #include <QtWidgets/QWidget>
@@ -88,6 +91,7 @@ public:
     QPushButton *question;
     QPushButton *categorie;
     QTreeWidget *treeWidget;
+    QPushButton *Modification;
     QWidget *page;
     QLabel *label_10;
     QLineEdit *lineEdit_ajoutCat;
@@ -121,6 +125,47 @@ public:
     QLabel *label_13;
     QLabel *label_14;
     QLabel *label_15;
+    QWidget *page_3;
+    QTabWidget *tabWidget;
+    QWidget *tab;
+    QComboBox *combo_cat;
+    QComboBox *combo_ques;
+    QLineEdit *line_label1;
+    QLineEdit *line_label2;
+    QDialogButtonBox *buttonBox;
+    QLabel *label_16;
+    QCheckBox *invisible_q;
+    QLabel *label_17;
+    QLabel *label_18;
+    QLabel *label_19;
+    QLabel *label_20;
+    QWidget *tab_3;
+    QLabel *label_21;
+    QComboBox *combo_ques_2;
+    QComboBox *combo_cat_2;
+    QLabel *label_22;
+    QComboBox *combo_prop_2;
+    QLabel *label_23;
+    QCheckBox *invisible_p;
+    QDialogButtonBox *buttonBox_2;
+    QLineEdit *prop;
+    QLabel *label_27;
+    QWidget *tab_2;
+    QComboBox *combo_ques_3;
+    QDialogButtonBox *buttonBox_3;
+    QLabel *label_24;
+    QLabel *label_25;
+    QComboBox *combo_prop_3;
+    QLabel *label_26;
+    QComboBox *combo_cat_3;
+    QLabel *label_28;
+    QLabel *reponse;
+    QWidget *horizontalLayoutWidget_7;
+    QHBoxLayout *horizontalLayout_7;
+    QRadioButton *radioButton1;
+    QRadioButton *radioButton2;
+    QRadioButton *radioButton3;
+    QLabel *label_30;
     QMenuBar *menuBar;
     QMenu *menuAdmin;
     QToolBar *mainToolBar;
@@ -147,7 +192,12 @@ public:
         lineEdit_pwd->setEchoMode(QLineEdit::Password);
         titre = new QLabel(connection);
         titre->setObjectName(QStringLiteral("titre"));
-        titre->setGeometry(QRect(190, 10, 251, 17));
+        titre->setGeometry(QRect(250, 10, 121, 20));
+        QFont font;
+        font.setFamily(QStringLiteral("DejaVu Sans"));
+        font.setBold(true);
+        font.setWeight(75);
+        titre->setFont(font);
         pushButton = new QPushButton(connection);
         pushButton->setObjectName(QStringLiteral("pushButton"));
         pushButton->setGeometry(QRect(250, 290, 99, 27));
@@ -156,7 +206,7 @@ public:
         pwd->setGeometry(QRect(90, 220, 91, 20));
         feuille = new QLabel(connection);
         feuille->setObjectName(QStringLiteral("feuille"));
-        feuille->setGeometry(QRect(210, 40, 221, 17));
+        feuille->setGeometry(QRect(200, 40, 231, 20));
         lineEdit_login = new QLineEdit(connection);
         lineEdit_login->setObjectName(QStringLiteral("lineEdit_login"));
         lineEdit_login->setGeometry(QRect(210, 180, 231, 27));
@@ -325,6 +375,9 @@ public:
         treeWidget->setHeaderItem(__qtreewidgetitem);
         treeWidget->setObjectName(QStringLiteral("treeWidget"));
         treeWidget->setGeometry(QRect(10, 20, 381, 321));
+        Modification = new QPushButton(Accueil);
+        Modification->setObjectName(QStringLiteral("Modification"));
+        Modification->setGeometry(QRect(430, 180, 99, 27));
         stackedWidget->addWidget(Accueil);
         page = new QWidget();
         page->setObjectName(QStringLiteral("page"));
@@ -455,6 +508,140 @@ public:
         label_15->setObjectName(QStringLiteral("label_15"));
         label_15->setGeometry(QRect(70, 180, 121, 17));
         stackedWidget->addWidget(page_2);
+        page_3 = new QWidget();
+        page_3->setObjectName(QStringLiteral("page_3"));
+        tabWidget = new QTabWidget(page_3);
+        tabWidget->setObjectName(QStringLiteral("tabWidget"));
+        tabWidget->setGeometry(QRect(0, 0, 601, 351));
+        tab = new QWidget();
+        tab->setObjectName(QStringLiteral("tab"));
+        combo_cat = new QComboBox(tab);
+        combo_cat->setObjectName(QStringLiteral("combo_cat"));
+        combo_cat->setGeometry(QRect(290, 60, 131, 27));
+        combo_ques = new QComboBox(tab);
+        combo_ques->setObjectName(QStringLiteral("combo_ques"));
+        combo_ques->setGeometry(QRect(290, 100, 131, 27));
+        line_label1 = new QLineEdit(tab);
+        line_label1->setObjectName(QStringLiteral("line_label1"));
+        line_label1->setGeometry(QRect(290, 140, 113, 27));
+        line_label2 = new QLineEdit(tab);
+        line_label2->setObjectName(QStringLiteral("line_label2"));
+        line_label2->setGeometry(QRect(290, 170, 113, 27));
+        buttonBox = new QDialogButtonBox(tab);
+        buttonBox->setObjectName(QStringLiteral("buttonBox"));
+        buttonBox->setGeometry(QRect(190, 260, 176, 27));
+        buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
+        label_16 = new QLabel(tab);
+        label_16->setObjectName(QStringLiteral("label_16"));
+        label_16->setGeometry(QRect(190, 20, 191, 17));
+        invisible_q = new QCheckBox(tab);
+        invisible_q->setObjectName(QStringLiteral("invisible_q"));
+        invisible_q->setGeometry(QRect(300, 220, 211, 22));
+        label_17 = new QLabel(tab);
+        label_17->setObjectName(QStringLiteral("label_17"));
+        label_17->setGeometry(QRect(80, 60, 171, 17));
+        label_18 = new QLabel(tab);
+        label_18->setObjectName(QStringLiteral("label_18"));
+        label_18->setGeometry(QRect(40, 100, 241, 20));
+        label_19 = new QLabel(tab);
+        label_19->setObjectName(QStringLiteral("label_19"));
+        label_19->setGeometry(QRect(190, 140, 67, 17));
+        label_20 = new QLabel(tab);
+        label_20->setObjectName(QStringLiteral("label_20"));
+        label_20->setGeometry(QRect(190, 170, 67, 17));
+        tabWidget->addTab(tab, QString());
+        tab_3 = new QWidget();
+        tab_3->setObjectName(QStringLiteral("tab_3"));
+        label_21 = new QLabel(tab_3);
+        label_21->setObjectName(QStringLiteral("label_21"));
+        label_21->setGeometry(QRect(100, 60, 171, 17));
+        combo_ques_2 = new QComboBox(tab_3);
+        combo_ques_2->setObjectName(QStringLiteral("combo_ques_2"));
+        combo_ques_2->setGeometry(QRect(310, 100, 131, 27));
+        combo_cat_2 = new QComboBox(tab_3);
+        combo_cat_2->setObjectName(QStringLiteral("combo_cat_2"));
+        combo_cat_2->setGeometry(QRect(310, 60, 131, 27));
+        label_22 = new QLabel(tab_3);
+        label_22->setObjectName(QStringLiteral("label_22"));
+        label_22->setGeometry(QRect(100, 100, 161, 20));
+        combo_prop_2 = new QComboBox(tab_3);
+        combo_prop_2->setObjectName(QStringLiteral("combo_prop_2"));
+        combo_prop_2->setGeometry(QRect(310, 140, 131, 27));
+        label_23 = new QLabel(tab_3);
+        label_23->setObjectName(QStringLiteral("label_23"));
+        label_23->setGeometry(QRect(30, 140, 261, 20));
+        invisible_p = new QCheckBox(tab_3);
+        invisible_p->setObjectName(QStringLiteral("invisible_p"));
+        invisible_p->setGeometry(QRect(310, 230, 211, 22));
+        buttonBox_2 = new QDialogButtonBox(tab_3);
+        buttonBox_2->setObjectName(QStringLiteral("buttonBox_2"));
+        buttonBox_2->setGeometry(QRect(200, 270, 176, 27));
+        buttonBox_2->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
+        prop = new QLineEdit(tab_3);
+        prop->setObjectName(QStringLiteral("prop"));
+        prop->setGeometry(QRect(320, 180, 113, 27));
+        label_27 = new QLabel(tab_3);
+        label_27->setObjectName(QStringLiteral("label_27"));
+        label_27->setGeometry(QRect(120, 190, 151, 20));
+        tabWidget->addTab(tab_3, QString());
+        tab_2 = new QWidget();
+        tab_2->setObjectName(QStringLiteral("tab_2"));
+        combo_ques_3 = new QComboBox(tab_2);
+        combo_ques_3->setObjectName(QStringLiteral("combo_ques_3"));
+        combo_ques_3->setGeometry(QRect(350, 110, 131, 27));
+        buttonBox_3 = new QDialogButtonBox(tab_2);
+        buttonBox_3->setObjectName(QStringLiteral("buttonBox_3"));
+        buttonBox_3->setGeometry(QRect(240, 280, 176, 27));
+        buttonBox_3->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
+        label_24 = new QLabel(tab_2);
+        label_24->setObjectName(QStringLiteral("label_24"));
+        label_24->setGeometry(QRect(140, 110, 161, 20));
+        label_25 = new QLabel(tab_2);
+        label_25->setObjectName(QStringLiteral("label_25"));
+        label_25->setGeometry(QRect(140, 70, 171, 17));
+        combo_prop_3 = new QComboBox(tab_2);
+        combo_prop_3->setObjectName(QStringLiteral("combo_prop_3"));
+        combo_prop_3->setGeometry(QRect(350, 150, 131, 27));
+        label_26 = new QLabel(tab_2);
+        label_26->setObjectName(QStringLiteral("label_26"));
+        label_26->setGeometry(QRect(130, 150, 181, 20));
+        combo_cat_3 = new QComboBox(tab_2);
+        combo_cat_3->setObjectName(QStringLiteral("combo_cat_3"));
+        combo_cat_3->setGeometry(QRect(350, 70, 131, 27));
+        label_28 = new QLabel(tab_2);
+        label_28->setObjectName(QStringLiteral("label_28"));
+        label_28->setGeometry(QRect(200, 190, 111, 20));
+        reponse = new QLabel(tab_2);
+        reponse->setObjectName(QStringLiteral("reponse"));
+        reponse->setGeometry(QRect(330, 190, 67, 17));
+        horizontalLayoutWidget_7 = new QWidget(tab_2);
+        horizontalLayoutWidget_7->setObjectName(QStringLiteral("horizontalLayoutWidget_7"));
+        horizontalLayoutWidget_7->setGeometry(QRect(200, 220, 209, 24));
+        horizontalLayout_7 = new QHBoxLayout(horizontalLayoutWidget_7);
+        horizontalLayout_7->setSpacing(6);
+        horizontalLayout_7->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
+        horizontalLayout_7->setContentsMargins(0, 0, 0, 0);
+        radioButton1 = new QRadioButton(horizontalLayoutWidget_7);
+        radioButton1->setObjectName(QStringLiteral("radioButton1"));
+
+        horizontalLayout_7->addWidget(radioButton1);
+
+        radioButton2 = new QRadioButton(horizontalLayoutWidget_7);
+        radioButton2->setObjectName(QStringLiteral("radioButton2"));
+
+        horizontalLayout_7->addWidget(radioButton2);
+
+        radioButton3 = new QRadioButton(horizontalLayoutWidget_7);
+        radioButton3->setObjectName(QStringLiteral("radioButton3"));
+
+        horizontalLayout_7->addWidget(radioButton3);
+
+        label_30 = new QLabel(tab_2);
+        label_30->setObjectName(QStringLiteral("label_30"));
+        label_30->setGeometry(QRect(200, 20, 181, 17));
+        tabWidget->addTab(tab_2, QString());
+        stackedWidget->addWidget(page_3);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -474,6 +661,7 @@ public:
         retranslateUi(MainWindow);
 
         stackedWidget->setCurrentIndex(4);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -484,10 +672,10 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
         login->setText(QApplication::translate("MainWindow", "login", 0));
         lineEdit_pwd->setText(QApplication::translate("MainWindow", "Burgerpwd", 0));
-        titre->setText(QApplication::translate("MainWindow", "TextLabel", 0));
+        titre->setText(QApplication::translate("MainWindow", "BURGER QUIZ", 0));
         pushButton->setText(QApplication::translate("MainWindow", "Valider", 0));
         pwd->setText(QApplication::translate("MainWindow", "password", 0));
-        feuille->setText(QApplication::translate("MainWindow", "TextLabel", 0));
+        feuille->setText(QApplication::translate("MainWindow", "Connection \303\240 la base de donn\303\251es", 0));
         lineEdit_login->setText(QApplication::translate("MainWindow", "Burger", 0));
         name->setText(QApplication::translate("MainWindow", "nom serveur", 0));
         lineEdit_name->setText(QApplication::translate("MainWindow", "Burger", 0));
@@ -518,6 +706,7 @@ public:
         proposition->setText(QApplication::translate("MainWindow", "Ajout proposition", 0));
         question->setText(QApplication::translate("MainWindow", "Ajout Question", 0));
         categorie->setText(QApplication::translate("MainWindow", "Ajout cat\303\251gorie", 0));
+        Modification->setText(QApplication::translate("MainWindow", "Modification", 0));
         label_10->setText(QApplication::translate("MainWindow", "AJOUT CATEGORIE", 0));
         label_11->setText(QApplication::translate("MainWindow", "Ajout Cat\303\251gorie", 0));
         Annuler_cat->setText(QApplication::translate("MainWindow", "Annuler", 0));
@@ -537,6 +726,29 @@ public:
         label_13->setText(QApplication::translate("MainWindow", "Choix categorie", 0));
         label_14->setText(QApplication::translate("MainWindow", "Choix Question", 0));
         label_15->setText(QApplication::translate("MainWindow", "Ajout proposition", 0));
+        label_16->setText(QApplication::translate("MainWindow", "Modification de la question", 0));
+        invisible_q->setText(QApplication::translate("MainWindow", "rendre la question invisible", 0));
+        label_17->setText(QApplication::translate("MainWindow", "Selection de la categorie", 0));
+        label_18->setText(QApplication::translate("MainWindow", "Selection de la question a modifier", 0));
+        label_19->setText(QApplication::translate("MainWindow", "Label1", 0));
+        label_20->setText(QApplication::translate("MainWindow", "Label2", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "question", 0));
+        label_21->setText(QApplication::translate("MainWindow", "Selection de la categorie", 0));
+        label_22->setText(QApplication::translate("MainWindow", "Selection de la question", 0));
+        label_23->setText(QApplication::translate("MainWindow", "Selection de la proposition \303\240 modifier", 0));
+        invisible_p->setText(QApplication::translate("MainWindow", "rendre la proposition invisible", 0));
+        label_27->setText(QApplication::translate("MainWindow", "Nouvelle proposition", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "proposition", 0));
+        label_24->setText(QApplication::translate("MainWindow", "Selection de la question", 0));
+        label_25->setText(QApplication::translate("MainWindow", "Selection de la categorie", 0));
+        label_26->setText(QApplication::translate("MainWindow", "Selection de la proposition", 0));
+        label_28->setText(QApplication::translate("MainWindow", "la reponse est : ", 0));
+        reponse->setText(QApplication::translate("MainWindow", "TextLabel", 0));
+        radioButton1->setText(QApplication::translate("MainWindow", "1", 0));
+        radioButton2->setText(QApplication::translate("MainWindow", "2", 0));
+        radioButton3->setText(QApplication::translate("MainWindow", "3", 0));
+        label_30->setText(QApplication::translate("MainWindow", "Modification de la r\303\251ponse", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "reponse", 0));
         menuAdmin->setTitle(QApplication::translate("MainWindow", "Fichier", 0));
     } // retranslateUi
 

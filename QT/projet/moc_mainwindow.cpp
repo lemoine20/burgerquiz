@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[19];
-    char stringdata0[335];
+    QByteArrayData data[24];
+    char stringdata0[456];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -47,7 +47,12 @@ QT_MOC_LITERAL(14, 280, 20), // "on_confirmer_clicked"
 QT_MOC_LITERAL(15, 301, 7), // "AddPBdd"
 QT_MOC_LITERAL(16, 309, 4), // "text"
 QT_MOC_LITERAL(17, 314, 8), // "response"
-QT_MOC_LITERAL(18, 323, 11) // "id_question"
+QT_MOC_LITERAL(18, 323, 11), // "id_question"
+QT_MOC_LITERAL(19, 335, 23), // "on_buttonBox_3_accepted"
+QT_MOC_LITERAL(20, 359, 23), // "on_Modification_clicked"
+QT_MOC_LITERAL(21, 383, 32), // "on_combo_cat_currentIndexChanged"
+QT_MOC_LITERAL(22, 416, 5), // "index"
+QT_MOC_LITERAL(23, 422, 33) // "on_combo_ques_currentIndexCha..."
 
     },
     "MainWindow\0on_Deconnexion_clicked\0\0"
@@ -58,7 +63,10 @@ QT_MOC_LITERAL(18, 323, 11) // "id_question"
     "on_Annuler_2_clicked\0"
     "on_comboBox_cat_currentIndexChanged\0"
     "current_index\0on_confirmer_clicked\0"
-    "AddPBdd\0text\0response\0id_question"
+    "AddPBdd\0text\0response\0id_question\0"
+    "on_buttonBox_3_accepted\0on_Modification_clicked\0"
+    "on_combo_cat_currentIndexChanged\0index\0"
+    "on_combo_ques_currentIndexChanged"
 };
 #undef QT_MOC_LITERAL
 
@@ -68,7 +76,7 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      13,   14, // methods
+      17,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -76,19 +84,23 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   79,    2, 0x08 /* Private */,
-       3,    0,   80,    2, 0x08 /* Private */,
-       4,    0,   81,    2, 0x08 /* Private */,
-       5,    0,   82,    2, 0x08 /* Private */,
-       6,    0,   83,    2, 0x08 /* Private */,
-       7,    0,   84,    2, 0x08 /* Private */,
-       8,    0,   85,    2, 0x08 /* Private */,
-       9,    0,   86,    2, 0x08 /* Private */,
-      10,    0,   87,    2, 0x08 /* Private */,
-      11,    0,   88,    2, 0x08 /* Private */,
-      12,    1,   89,    2, 0x08 /* Private */,
-      14,    0,   92,    2, 0x08 /* Private */,
-      15,    3,   93,    2, 0x08 /* Private */,
+       1,    0,   99,    2, 0x08 /* Private */,
+       3,    0,  100,    2, 0x08 /* Private */,
+       4,    0,  101,    2, 0x08 /* Private */,
+       5,    0,  102,    2, 0x08 /* Private */,
+       6,    0,  103,    2, 0x08 /* Private */,
+       7,    0,  104,    2, 0x08 /* Private */,
+       8,    0,  105,    2, 0x08 /* Private */,
+       9,    0,  106,    2, 0x08 /* Private */,
+      10,    0,  107,    2, 0x08 /* Private */,
+      11,    0,  108,    2, 0x08 /* Private */,
+      12,    1,  109,    2, 0x08 /* Private */,
+      14,    0,  112,    2, 0x08 /* Private */,
+      15,    3,  113,    2, 0x08 /* Private */,
+      19,    0,  120,    2, 0x08 /* Private */,
+      20,    0,  121,    2, 0x08 /* Private */,
+      21,    1,  122,    2, 0x08 /* Private */,
+      23,    1,  125,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -104,6 +116,10 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void, QMetaType::Int,   13,
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::Int,   16,   17,   18,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   22,
+    QMetaType::Void, QMetaType::Int,   22,
 
        0        // eod
 };
@@ -127,6 +143,10 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 10: _t->on_comboBox_cat_currentIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 11: _t->on_confirmer_clicked(); break;
         case 12: _t->AddPBdd((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
+        case 13: _t->on_buttonBox_3_accepted(); break;
+        case 14: _t->on_Modification_clicked(); break;
+        case 15: _t->on_combo_cat_currentIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 16: _t->on_combo_ques_currentIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -157,13 +177,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 13)
+        if (_id < 17)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 13;
+        _id -= 17;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 13)
+        if (_id < 17)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 13;
+        _id -= 17;
     }
     return _id;
 }

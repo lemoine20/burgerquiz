@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
 //    std::cout<< ui->stackedWidget->currentIndex();
 
     ui->treeWidget->setHeaderHidden(true);
-    connect( ui->treeWidget, SIGNAL( sectionDoubleClicked() ), this,  SLOT( treeHeaderDoubleClick() )  );
+    //connect( ui->treeWidget, SIGNAL( sectionDoubleClicked() ), this,  SLOT( treeHeaderDoubleClick() )  );
 }
 
 MainWindow::~MainWindow()
@@ -28,9 +28,10 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::treeHeaderDoubleClick(){
+/*void MainWindow::treeHeaderDoubleClick(){
+    qDebug()<<ui->treeWidget->currentItem();
     qDebug()<<ui->treeWidget->selectedItems();
-}
+}*/
 
 
 void MainWindow::on_Deconnexion_clicked()
@@ -274,7 +275,7 @@ void MainWindow::AddQBdd(int cat,QString Question1, QString Question2, QString P
  }
 
 void MainWindow::on_categorie_clicked(){
-     ui->stackedWidget->setCurrentIndex(3);// Accès à la page d'ajout de categorie
+    ui->stackedWidget->setCurrentIndex(3);// Accès à la page d'ajout de categorie
     ui->lineEdit_ajoutCat->clear();
 }
 
@@ -382,18 +383,11 @@ void MainWindow::on_proposition_clicked()
     statement = connection->prepareStatement("SELECT * FROM Categorie");
     result = statement->executeQuery();
 
-    catNom = connection->prepareStatement("SELECT id_categorie FROM Categorie ORDER BY id_categorie DESC LIMIT 1");
-    catNo = catNom->executeQuery();
-    catNo->next();
-    for(int i = 1; i < catNo->getInt("id_categorie"); ++i){
-        result->next();
-        ui->comboBox_cat->addItem(QString((result->getString("nom_categorie")).asStdString().data()));
-        quesNom = connection->prepareStatement("SELECT count(*) FROM Question WHERE id_categorie=?");
-        quesNom->setInt(1, (ui->comboBox_cat->currentIndex()+1));
-        quesNo = quesNom->executeQuery();
-        quesNo->next();
-        on_comboBox_cat_currentIndexChanged(ui->comboBox_cat->currentIndex());
+    while( result->next()){
 
+        ui->comboBox_cat->addItem(QString((result->getString("nom_categorie")).asStdString().data()));
+
+        on_comboBox_cat_currentIndexChanged(ui->comboBox_cat->currentIndex());
     }
 }
 
@@ -409,7 +403,7 @@ void MainWindow::on_comboBox_cat_currentIndexChanged(int current_index)
     quesstat->setInt(1, (current_index+1));
     quesres = quesstat->executeQuery();
     ui->comboBox_quest->clear();
-    for (int j=1;quesres->next();j++){
+    while(quesres->next()){
         QString text = QString (((quesres->getString("label1"))+ " : "+(quesres->getString("label2"))).asStdString().data());
         ui->comboBox_quest->addItem(text);
     }
@@ -422,71 +416,85 @@ void MainWindow::on_confirmer_clicked()
     if(ui->lineEdit->text() != "" || (ui->radioButton_10->isChecked()!= false||ui->radioButton_11->isChecked()!= false||ui->radioButton_12->isChecked()!= false)){
         if(ui->radioButton_10->isChecked()== true){
 
-            quesstat = connection->prepareStatement("SELECT id_question FROM Question WHERE label1=? AND label2=?");
-            QList<QString> label=ui->comboBox_cat->currentText().split(":");
-            quesstat->setString(1, label[0].toUtf8().constData());
+            PreparedStatement* teststat = connection->prepareStatement("SELECT * FROM Question WHERE label1=? AND label2=?");
+            QList<QString> label=ui->comboBox_quest->currentText().split(':');
+            qDebug()<<ui->comboBox_quest->currentText();
+            qDebug()<<label.size();
+            teststat->setString(1, label[0].toUtf8().constData());
             qDebug()<<label[0].toUtf8().constData();
-            quesstat->setString(2, label[1].toUtf8().constData());
-            quesres = quesstat->executeQuery();
-            quesres->next();
-            AddPBdd(ui->lineEdit->text(),ui->radioButton_10->text(), quesres->getInt("id_question"));
+            teststat->setString(2, label[1].toUtf8().constData());
+            qDebug()<<label[1].toUtf8().constData();
+
+            ResultSet* testres = teststat->executeQuery();
+            testres->next();
+            qDebug()<<testres->getInt("id_question");
+
+            AddPBdd(ui->lineEdit->text(),ui->radioButton_10->text(), testres->getInt("id_question"));
 
         }else if(ui->radioButton_11->isChecked()== true){
-            quesstat = connection->prepareStatement("SELECT id_question FROM Question WHERE nom_question=?");
-            quesstat->setString(1, ui->comboBox_cat->currentText().toUtf8().constData());
-            quesres = quesstat->executeQuery();
-            quesres->next();
-            AddPBdd(ui->lineEdit->text(),ui->radioButton_11->text(), quesres->getInt("id_question"));
+            PreparedStatement* teststat1 = connection->prepareStatement("SELECT * FROM Question WHERE label1=? AND label2=?");
+            QList<QString> label=ui->comboBox_quest->currentText().split(":");
+            qDebug()<<label.size();
+            teststat1->setString(1, label[0].toUtf8().constData());
+            qDebug()<<label[0].toUtf8().constData();
+            teststat1->setString(2, label[1].toUtf8().constData());
+            ResultSet* testres1 = teststat1->executeQuery();
+            testres1->next();
+            AddPBdd(ui->lineEdit->text(),ui->radioButton_11->text(), testres1->getInt("id_question"));
         }else if(ui->radioButton_12->isChecked()== true){
-            quesstat = connection->prepareStatement("SELECT id_question FROM Question WHERE nom_question=?");
-            quesstat->setString(1, ui->comboBox_cat->currentText().toUtf8().constData());
-            quesres = quesstat->executeQuery();
-            quesres->next();
-            AddPBdd(ui->lineEdit->text(),ui->radioButton_12->text(), quesres->getInt("id_question"));
+            PreparedStatement* teststat2 = connection->prepareStatement("SELECT * FROM Question WHERE label1=? AND label2=?");
+            QList<QString> label=ui->comboBox_quest->currentText().split(":");
+            qDebug()<<label.size();
+            teststat2->setString(1, label[0].toUtf8().constData());
+            qDebug()<<label[0].toUtf8().constData();
+            teststat2->setString(2, label[1].toUtf8().constData());
+            ResultSet* testres2 = teststat2->executeQuery();
+            testres2->next();
+            AddPBdd(ui->lineEdit->text(),ui->radioButton_12->text(), testres2->getInt("id_question"));
         }
     }
 
     if(ui->lineEdit_2->text() != "" || (ui->radioButton_13->isChecked()!= false||ui->radioButton_14->isChecked()!= false||ui->radioButton_15->isChecked()!= false)){
         if(ui->radioButton_13->isChecked()== true){
-            quesstat = connection->prepareStatement("SELECT id_question FROM Question WHERE nom_question=?");
-            quesstat->setString(1, ui->comboBox_cat->currentText().toUtf8().constData());
-            quesres = quesstat->executeQuery();
-            quesres->next();
-            AddPBdd(ui->lineEdit_2->text(),ui->radioButton_13->text(), quesres->getInt("id_question"));
+            PreparedStatement* teststat3 = connection->prepareStatement("SELECT * FROM Question WHERE nom_question=?");
+            teststat3->setString(1, ui->comboBox_quest->currentText().toUtf8().constData());
+            ResultSet* testres3 = teststat3->executeQuery();
+            testres3->next();
+            AddPBdd(ui->lineEdit_2->text(),ui->radioButton_13->text(), testres3->getInt("id_question"));
         }else if(ui->radioButton_14->isChecked()== true){
-            quesstat = connection->prepareStatement("SELECT id_question FROM Question WHERE nom_question=?");
-            quesstat->setString(1, ui->comboBox_cat->currentText().toUtf8().constData());
-            quesres = quesstat->executeQuery();
-            quesres->next();
-            AddPBdd(ui->lineEdit_2->text(),ui->radioButton_14->text(), quesres->getInt("id_question"));
+            PreparedStatement* teststat4 = connection->prepareStatement("SELECT * FROM Question WHERE nom_question=?");
+            teststat4->setString(1, ui->comboBox_quest->currentText().toUtf8().constData());
+            ResultSet* testres4 = teststat4->executeQuery();
+            testres4->next();
+            AddPBdd(ui->lineEdit_2->text(),ui->radioButton_14->text(), testres4->getInt("id_question"));
         }else if(ui->radioButton_15->isChecked()== true){
-            quesstat = connection->prepareStatement("SELECT id_question FROM Question WHERE nom_question=?");
-            quesstat->setString(1, ui->comboBox_cat->currentText().toUtf8().constData());
-            quesres = quesstat->executeQuery();
-            quesres->next();
-            AddPBdd(ui->lineEdit_2->text(),ui->radioButton_15->text(), quesres->getInt("id_question"));
+            PreparedStatement* teststat5 = connection->prepareStatement("SELECT * FROM Question WHERE nom_question=?");
+            teststat5->setString(1, ui->comboBox_quest->currentText().toUtf8().constData());
+            ResultSet* testres5 = teststat5->executeQuery();
+            testres5->next();
+            AddPBdd(ui->lineEdit_2->text(),ui->radioButton_15->text(), testres5->getInt("id_question"));
         }
     }
 
     if(ui->lineEdit_3->text() != "" || (ui->radioButton_16->isChecked()!= false||ui->radioButton_17->isChecked()!= false||ui->radioButton_18->isChecked()!= false)){
         if(ui->radioButton_16->isChecked()== true){
-            quesstat = connection->prepareStatement("SELECT id_question FROM Question WHERE nom_question=?");
-            quesstat->setString(1, ui->comboBox_cat->currentText().toUtf8().constData());
-            quesres = quesstat->executeQuery();
-            quesres->next();
-            AddPBdd(ui->lineEdit_3->text(),ui->radioButton_17->text(), quesres->getInt("id_question"));
+            PreparedStatement* teststat6 = connection->prepareStatement("SELECT * FROM Question WHERE nom_question=?");
+            teststat6->setString(1, ui->comboBox_quest->currentText().toUtf8().constData());
+            ResultSet* testres6 = teststat6->executeQuery();
+            testres6->next();
+            AddPBdd(ui->lineEdit_3->text(),ui->radioButton_17->text(), testres6->getInt("id_question"));
         }else if(ui->radioButton_17->isChecked()== true){
-            quesstat = connection->prepareStatement("SELECT id_question FROM Question WHERE nom_question=?");
-            quesstat->setString(1, ui->comboBox_cat->currentText().toUtf8().constData());
-            quesres = quesstat->executeQuery();
-            quesres->next();
-            AddPBdd(ui->lineEdit_3->text(),ui->radioButton_16->text(), quesres->getInt("id_question"));
+            PreparedStatement* teststat7 = connection->prepareStatement("SELECT * FROM Question WHERE nom_question=?");
+            teststat7->setString(1, ui->comboBox_quest->currentText().toUtf8().constData());
+            ResultSet* testres7 = teststat7->executeQuery();
+            testres7->next();
+            AddPBdd(ui->lineEdit_3->text(),ui->radioButton_16->text(), testres7->getInt("id_question"));
         }else if(ui->radioButton_18->isChecked()== true){
-            quesstat = connection->prepareStatement("SELECT id_question FROM Question WHERE nom_question=?");
-            quesstat->setString(1, ui->comboBox_cat->currentText().toUtf8().constData());
-            quesres = quesstat->executeQuery();
-            quesres->next();
-            AddPBdd(ui->lineEdit_3->text(),ui->radioButton_18->text(), quesres->getInt("id_question"));
+            PreparedStatement* teststat8 = connection->prepareStatement("SELECT * FROM Question WHERE nom_question=?");
+            teststat8->setString(1, ui->comboBox_quest->currentText().toUtf8().constData());
+            ResultSet* testres8 = teststat8->executeQuery();
+            testres8->next();
+            AddPBdd(ui->lineEdit_3->text(),ui->radioButton_18->text(), testres8->getInt("id_question"));
         }
     }
     readtree();
@@ -525,6 +533,7 @@ void MainWindow::AddPBdd(QString text, QString response, int id_question){
 
     qDebug()<<1;
     addpstatement = connection->prepareStatement("INSERT INTO Proposition (nom_proposition, reponse,id_question) VALUES (?,?,?)");
+    std::cout<<"INSERT INTO Proposition (nom_proposition, reponse,id_question) VALUES ("<<text.toUtf8().constData()<<","<<response.toInt()<<","<<id_question<<")";
     addpstatement->setString(1, (text.toUtf8().constData()));
     qDebug()<<(text.toUtf8().constData());
     addpstatement->setInt(2, (response.toInt()));
@@ -536,4 +545,69 @@ void MainWindow::AddPBdd(QString text, QString response, int id_question){
     succes.exec();
     readtree();
 
+}
+
+void MainWindow::on_buttonBox_3_accepted()
+{
+
+}
+
+void MainWindow::on_Modification_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(5);
+    ui->tabWidget->setCurrentIndex(0);
+
+    ui->combo_cat->clear();
+    ui->combo_ques->clear();
+
+    statement = connection->prepareStatement("SELECT * FROM Categorie");
+    result = statement->executeQuery();
+
+    while( result->next()){
+        ui->combo_cat->addItem(QString((result->getString("nom_categorie")).asStdString().data()));
+        on_combo_cat_currentIndexChanged(ui->combo_cat->currentIndex());
+    }
+}
+
+void MainWindow::on_combo_cat_currentIndexChanged(int index)
+{
+        ui->combo_ques->clear();
+        quesstat = connection->prepareStatement("SELECT * FROM Question WHERE id_categorie=?");
+        quesstat->setInt(1, (index+1));
+try {
+        quesres = quesstat->executeQuery();
+        ui->comboBox_quest->clear();
+        while(quesres->next()){
+            QString text = QString (((quesres->getString("label1"))+ " : "+(quesres->getString("label2"))).asStdString().data());
+            ui->combo_ques->addItem(text);
+            on_combo_ques_currentIndexChanged(quesres->getInt("id_question"));
+        }
+}catch (SQLException& e)
+        {
+          cout << "Error: " << e.what() << "." << endl;
+          return;
+        }
+
+}
+
+void MainWindow::on_combo_ques_currentIndexChanged(int index)
+{
+    ui->line_label1->clear();
+    ui->line_label2->clear();
+
+    quesNom = connection->prepareStatement("SELECT * FROM Question WHERE id_question=?");
+    quesNom->setInt(1, (index+1));
+    quesNo = quesNom->executeQuery();
+
+
+    while( quesNo->next()){
+        ui->line_label1->setPlaceholderText(quesNo->getString("label1").asStdString().data());
+        ui->line_label2->setPlaceholderText(quesNo->getString("label2").asStdString().data());
+    }
+}
+
+void MainWindow::on_buttonBox_rejected()
+{
+    readtree();
+    ui->stackedWidget->setCurrentIndex(2);
 }
