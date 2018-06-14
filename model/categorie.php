@@ -1,7 +1,7 @@
 <?php
 /**
  * \file categorie.php
- * \brief Classe categorie.
+ * \brief Classe Categorie.
  * \author Clément C.
  */
  

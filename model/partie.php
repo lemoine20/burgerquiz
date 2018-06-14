@@ -1,7 +1,7 @@
 <?php
 /**
  * \file partie.php
- * \brief Classe partie.
+ * \brief Classe Partie.
  * \author Clément C.
  */
  
@@ -15,7 +15,7 @@ class Partie {
  * \fn __construct ($id = NULL)
  * \brief Constructeur de la classe Partie.
  *
- * \param $id Entier: id de l'object Partie.
+ * \param $id Entier: id de l'objet Partie.
  */	
 	public function __construct($id = NULL){
 		$this->id = $id;
@@ -34,7 +34,7 @@ class Partie {
  * \brief Supprime les partie non-finie d'un utilisateur.
  *
  * \param $dbh Objet PDO de connexion à la base de donnée.
- * \param $utilisateur Objet utilisateur à qui supprimer les parties non-finie.
+ * \param $utilisateur Objet Utilisateur à qui supprimer les parties non-finie.
  */
 	public static function clear($dbh, $utilisateur){
 		/*Remove the not finished partie_jouee from a utilisateur*/
@@ -54,7 +54,7 @@ class Partie {
 	}
 /**
  * \fn ins($dbh)
- * \brief Insère l'objet partieJouee dans la base de donnée.
+ * \brief Insère l'objet PartieJouee dans la base de donnée.
  * \param $dbh Objet PDO de connexion à la base de donnée.
  */	
 	private function ins($dbh){
@@ -67,7 +67,7 @@ class Partie {
 	}
 /**
  * \fn del ($dbh)
- * \brief Supprime l'objet partieJouee de la base de donnée.
+ * \brief Supprime l'objet PartieJouee de la base de donnée.
  * \param $dbh Objet PDO de connexion à la base de donnée.
  */	
 	public function del($dbh){
@@ -82,9 +82,9 @@ class Partie {
 	}
 /**
  * \fn addProposition ($dbh, $proposition)
- * \brief Ajoute une partie à cette partie (crée partie_proposition dans la bdd).
+ * \brief Ajoute une Proposition à cette partie (crée partie_proposition dans la bdd).
  * \param $dbh Objet PDO de connexion à la base de donnée.
- * \param $proposition Objet proposition à ajouter.
+ * \param $proposition Objet Proposition à ajouter.
  */
 	private function addProposition($dbh, $proposition){
 		//Prepare querry
@@ -101,7 +101,7 @@ class Partie {
  * \brief Remplit la partie de propositions tirés au sort.
  * \param $dbh Objet PDO de connexion à la base de donnée.
  * \param $compte Entier: nombre de propositions par question à générer.
- * \param $categorie Objet: categorie dans laquelle vont être générées les propositions.
+ * \param $categorie Objet Categorie dans laquelle vont être générées les propositions.
  *        (si non-définie, la categorie sera tirée au sort)
  * \return Booléan: true si la génération a fonctionné, false si la génération a échoué.
  */
@@ -129,7 +129,7 @@ class Partie {
  * \fn start ($dbh, $utilisateur)
  * \brief Commence une partie générée.
  * \param $dbh Objet PDO de connexion à la base de donnée.
- * \param $compte Objet: utilisateur qui va jouer la partie.
+ * \param $compte Objet Utilisateur qui va jouer la partie.
  */
 	public function start($dbh, $utilisateur){		
 		/*Insert the new partie_jouee*/
@@ -146,7 +146,7 @@ class Partie {
  * \fn finish ($dbh, $utilisateur)
  * \brief Termine une partie et comptabilise le temps et le score.
  * \param $dbh Objet PDO de connexion à la base de donnée.
- * \param $compte Objet: utilisateur qui a joué la partie.
+ * \param $compte Objet Utilisateur qui a joué la partie.
  * \return  - une liste comportant le score et la durée de la partie.
  *			- NULL si la partie n'a pas été trouvée
  */
@@ -210,7 +210,7 @@ class Partie {
  * \fn getPropositions($dbh)
  * \brief Retourne les propositions de la partie.
  * \param $dbh Objet PDO de connexion à la base de donnée.
- * \return une liste de propositions. 
+ * \return une liste de d'objets Proposition. 
  */	
 	public function getPropositions($dbh){
 		//(The propositions are ordered by questions because of Partie::generate())

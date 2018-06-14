@@ -79,7 +79,8 @@ class Utilisateur {
  * Active le compte utilisateur après avoir vérifié que le code d'activation est bon.
  * \param $dbh Objet PDO de connexion à la base de donnée.
  * \param $code Entier: code d'activation .
- * \return Booléan: Booléan true si l'activation a échoué et false is elle a réussit.
+ * \return Booléan: vrai si l'activation a échoué 
+ *                  faut si elle a réussit.
  */	
 	public function activate($dbh, $code){
 		if($code < 1000 || $code > 9999)

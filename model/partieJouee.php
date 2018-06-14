@@ -1,7 +1,7 @@
 <?php
 /**
  * \file partieJouee.php
- * \brief Classe partiejouee.
+ * \brief Classe PartieJouee.
  * \author Clément C.
  */
  

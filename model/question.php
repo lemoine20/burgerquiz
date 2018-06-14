@@ -1,7 +1,7 @@
 <?php
 /**
  * \file question.php
- * \brief Classe question.
+ * \brief Classe Question.
  * \author Clément C.
  */
 
@@ -53,7 +53,7 @@ class Question {
  * \brief Querry SQL des propositions appartenants à cette question.
  *
  * \param $dbh Objet PDO de connexion à la base de donnée.
- * \return Liste des object Proposition associé à cette question.
+ * \return Liste des objets Proposition associés à cette question.
  */	
 	public function getPropositions($dbh){
 		return Proposition::get($dbh, NULL, $this->id);

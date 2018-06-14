@@ -1,7 +1,7 @@
 <?php
 /**
  * \file proposition.php
- * \brief Classe proposition.
+ * \brief Classe Proposition.
  * \author Clément C.
  */
 
@@ -35,8 +35,8 @@ class Proposition {
  * \brief Getter de l'attribut $reponse.
  *
  * \return Entier: 1 si la bonne réponse est le label 1,
- *         2 si la bonne réponse est le label 2 et
- *         3 si la bonne réponse est le label 1 et le label 2.
+ *                 2 si la bonne réponse est le label 2 et
+ *                 3 si la bonne réponse est le label 1 et le label 2.
  */	
 	public function getReponse(){
 		return $this->reponse;
@@ -46,7 +46,7 @@ class Proposition {
  * \brief Querry SQL de la question de cette proposition.
  *
  * \param $dbh Objet PDO de connexion à la base de donnée.
- * \return Objet de la classe Question correspondant.
+ * \return Objet Question correspondant.
  */
 	public function getQuestion($dbh){
 		return Question::get($dbh, $this->id_question)[0];
