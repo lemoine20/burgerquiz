@@ -150,6 +150,7 @@ public:
     QDialogButtonBox *buttonBox_2;
     QLineEdit *prop;
     QLabel *label_27;
+    QLabel *label_29;
     QWidget *tab_2;
     QComboBox *combo_ques_3;
     QDialogButtonBox *buttonBox_3;
@@ -523,10 +524,10 @@ public:
         combo_ques->setGeometry(QRect(290, 100, 131, 27));
         line_label1 = new QLineEdit(tab);
         line_label1->setObjectName(QStringLiteral("line_label1"));
-        line_label1->setGeometry(QRect(290, 140, 113, 27));
+        line_label1->setGeometry(QRect(290, 140, 231, 27));
         line_label2 = new QLineEdit(tab);
         line_label2->setObjectName(QStringLiteral("line_label2"));
-        line_label2->setGeometry(QRect(290, 170, 113, 27));
+        line_label2->setGeometry(QRect(290, 170, 231, 27));
         buttonBox = new QDialogButtonBox(tab);
         buttonBox->setObjectName(QStringLiteral("buttonBox"));
         buttonBox->setGeometry(QRect(190, 260, 176, 27));
@@ -583,6 +584,9 @@ public:
         label_27 = new QLabel(tab_3);
         label_27->setObjectName(QStringLiteral("label_27"));
         label_27->setGeometry(QRect(120, 190, 151, 20));
+        label_29 = new QLabel(tab_3);
+        label_29->setObjectName(QStringLiteral("label_29"));
+        label_29->setGeometry(QRect(180, 20, 211, 17));
         tabWidget->addTab(tab_3, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QStringLiteral("tab_2"));
@@ -660,8 +664,8 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(4);
-        tabWidget->setCurrentIndex(0);
+        stackedWidget->setCurrentIndex(5);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -738,6 +742,7 @@ public:
         label_23->setText(QApplication::translate("MainWindow", "Selection de la proposition \303\240 modifier", 0));
         invisible_p->setText(QApplication::translate("MainWindow", "rendre la proposition invisible", 0));
         label_27->setText(QApplication::translate("MainWindow", "Nouvelle proposition", 0));
+        label_29->setText(QApplication::translate("MainWindow", "Modification de la proposition", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "proposition", 0));
         label_24->setText(QApplication::translate("MainWindow", "Selection de la question", 0));
         label_25->setText(QApplication::translate("MainWindow", "Selection de la categorie", 0));

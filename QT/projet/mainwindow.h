@@ -77,9 +77,13 @@ private slots:
 
         void on_combo_cat_currentIndexChanged(int index);
 
-        void on_combo_ques_currentIndexChanged(int index);
+        void on_combo_ques_currentIndexChanged(QString text);
 
         void on_buttonBox_rejected();
+
+        void on_tabWidget_currentChanged(int index);
+
+        void on_combo_cat_2_currentIndexChanged(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;

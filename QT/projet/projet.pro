@@ -14,10 +14,10 @@ LIBS += -lmysqlcppconn
 CONFIG += c++11
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    connection.cpp
+        mainwindow.cpp #\
+    #connection.cpp
 
-HEADERS  += mainwindow.h \
-    connection.h
+HEADERS  += mainwindow.h #\
+    #connection.h
 
 FORMS    += mainwindow.ui

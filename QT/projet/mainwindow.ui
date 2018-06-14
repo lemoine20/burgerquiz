@@ -842,7 +842,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -873,7 +873,7 @@
          <rect>
           <x>290</x>
           <y>140</y>
-          <width>113</width>
+          <width>231</width>
           <height>27</height>
          </rect>
         </property>
@@ -883,7 +883,7 @@
          <rect>
           <x>290</x>
           <y>170</y>
-          <width>113</width>
+          <width>231</width>
           <height>27</height>
          </rect>
         </property>
@@ -1100,6 +1100,19 @@
         </property>
         <property name="text">
          <string>Nouvelle proposition</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_29">
+        <property name="geometry">
+         <rect>
+          <x>180</x>
+          <y>20</y>
+          <width>211</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Modification de la proposition</string>
         </property>
        </widget>
       </widget>
