@@ -10,12 +10,12 @@
 			<button id="label2" class="reponse inv small-title yellow"></button><br/>
 			<button id="both" class="reponse inv small-title blue">ou les deux ?</button>
 		</p>
-		<video id="intro">
+		<video id="intro-game">
 			<source src="res/Sel_ou_Poivre.mp4" type="video/mp4">
 		</video>
 		<p id="countdown" class="enter inv"></p>
 		<script>var questions = <?php
-			global $questionnaire;
+			$questionnaire = $partie->getQuestionnaire($dbh);
 			echo json_encode($questionnaire);
 		?></script>
 		<script src="script/game.js"></script> 

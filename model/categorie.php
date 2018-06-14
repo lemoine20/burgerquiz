@@ -24,7 +24,7 @@ class Categorie {
  * \fn getQuestions ($dbh)
  * \brief Querry SQL des questions associés à cette categoie.
  *
- * \param $dbh Object PDO de connexion à la base de donnée.
+ * \param $dbh Objet PDO de connexion à la base de donnée.
  * \return Liste d'objet Question correspondants.
  */
 	public function getQuestions($dbh){
@@ -34,7 +34,7 @@ class Categorie {
  * \fn get ($dbh, $id = NULL, $nom=NULL)
  * \brief Querry SQL de categories.
  *
- * \param $dbh Object PDO de connexion à la base de donnée.
+ * \param $dbh Objet PDO de connexion à la base de donnée.
  * \param $id Entier: Id de la categorie recherchée.
  * \param $nom Nom de la categorie recherchée.
  * \return Liste des objets Categorie trouvés dans la base de donnée.
@@ -59,7 +59,7 @@ class Categorie {
  * \fn generate ($dbh)
  * \brief Méthode de tirage au sort de categorie.
  *
- * \param $dbh Object PDO de connexion à la base de donnée.
+ * \param $dbh Objet PDO de connexion à la base de donnée.
  * \return Objet Categorie tiré au sort.
  */
 	public static function generate($dbh){

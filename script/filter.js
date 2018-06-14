@@ -12,7 +12,7 @@ filter.onchange = ()=>{
 		pseudo.style.display = "inline";
 	else if(filter.value == "theme")
 		theme.style.display = "inline";
-	else if(filter.value == "rank" || filter.value == "score" || filter.value == "temps"){
+	else if(filter.value == "rank" || filter.value == "score" || filter.value == "temps" || filter.value == "date"){
 		min.style.display = "inline";
 		max.style.display = "inline";
 	}

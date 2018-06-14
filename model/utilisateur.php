@@ -77,7 +77,7 @@ class Utilisateur {
  * \fn activate ($dbh, $code)
  * \brief Méthode d'activation du compte utilisateur.
  * Active le compte utilisateur après avoir vérifié que le code d'activation est bon.
- * \param $dbh Object PDO de connexion à la base de donnée.
+ * \param $dbh Objet PDO de connexion à la base de donnée.
  * \param $code Entier: code d'activation .
  * \return Booléan: Booléan true si l'activation a échoué et false is elle a réussit.
  */	
@@ -98,7 +98,7 @@ class Utilisateur {
 /**
  * \fn ins ($dbh)
  * \brief Insère l'objet utilisateur dans la base de donnée.
- * \param $dbh Object PDO de connexion à la base de donnée.
+ * \param $dbh Objet PDO de connexion à la base de donnée.
  */	
 	public function ins($dbh) {
 		//Prepare querry
@@ -117,7 +117,7 @@ class Utilisateur {
 /**
  * \fn del ($dbh)
  * \brief Supprime l'utilisateur de la base de donnée.
- * \param $dbh Object PDO de connexion à la base de donnée.
+ * \param $dbh Objet PDO de connexion à la base de donnée.
  */	
 	public function del($dbh) {
 		//Prepare querry
@@ -131,7 +131,7 @@ class Utilisateur {
  * \fn get ($dbh, $id=NULL, $nom=NULL, $mdp=NULL, $mail=NULL, $code=NULL)
  * \brief Querry SQL de utilisateur.
  *
- * \param $dbh Object PDO de connexion à la base de donnée.
+ * \param $dbh Objet PDO de connexion à la base de donnée.
  * \param $id Entier: Id de l'utilisateur recherché.
  * \param $nom Pseudo de l'utilisateur recherché.
  * \param $mdp Mot de Passe hashé de l'utilisateur recherché.

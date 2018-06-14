@@ -20,7 +20,7 @@
 			<a class="bgblue small-button grow" href="index.php?do=existante">Parties Existantes</a>
 			<a class="bggreen small-button grow" href="index.php?do=creation">Nouvelle Partie</a>
 		</div>
-		<div align="center">
+		<div align="center" style="margin-top:3vh;">
 			<form role="form" method="get" action="index.php?do=home">
 				<select id="filter" class="inline" name="filter">
 					<option value="pseudo" selected>Pseudo</option>
@@ -41,7 +41,7 @@
 				<div class="inline">
 					<input id="maxInput" style="display:none;" type="text" name="max" class="form-control" placeholder="max">
 				</div>
-				<button type="submit" class="inline small-button bggreen">Chercher</button>
+				<button type="submit" class="inline small-button bgblue">Filtrer</button>
 			</form>
 		</div>
 		<script src="script/filter.js"></script>
@@ -53,20 +53,20 @@
 				<th>Score</th>
 				<th>Temps</th>
 			</tr>
-			<tr>
-				<td>#1</td>
-				<td>Toto</td>
-				<td>Politique</td>
-				<td>5/9</td>
-				<td>00:14</td>
-			</tr>
-			<tr>
-				<td>#1</td>
-				<td>Toto</td>
-				<td>Politique</td>
-				<td>5/9</td>
-				<td>00:14</td>
-			</tr>
+		<?php
+			$parties = PartieJouee::get($dbh);
+			foreach($parties as $i => $partie){
+				if($i == 10)
+					break;
+				echo "<tr>";
+				echo "<td>#".($i+1)."</td>";
+				echo "<td>".$partie->getNomUtilisateur()."</td>";
+				echo "<td>".$partie->getNomCategorie()."</td>";
+				echo "<td>".$partie->getScore()."</td>";
+				echo "<td>".$partie->getTemps()."</td>";
+				echo "</tr>";
+			}
+		?>
 		</table>
 	</body>
 </html>

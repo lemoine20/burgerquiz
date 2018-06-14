@@ -25,7 +25,7 @@
 				<input class="radio" type="radio" id="aleatoire" name="categorie" checked>
 				<label class="small" for="aleatoire">Aleatoire</label><br>
 				<?php
-					global $categories;
+					$categories = Categorie::get($dbh);
 					foreach ($categories as $k => $categorie){
 						$nom = $categorie->getNom();
 						echo '<input class="radio" type="radio" id="radio'.$k.'" name="categorie" value="'.$nom.'">';

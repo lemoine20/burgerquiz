@@ -45,7 +45,7 @@ class Proposition {
  * \fn getQuestion ($dbh)
  * \brief Querry SQL de la question de cette proposition.
  *
- * \param $dbh Object PDO de connexion à la base de donnée.
+ * \param $dbh Objet PDO de connexion à la base de donnée.
  * \return Objet de la classe Question correspondant.
  */
 	public function getQuestion($dbh){
@@ -56,7 +56,7 @@ class Proposition {
  * \fn get ($dbh, $id = NULL, $id_question = NULL)
  * \brief Querry SQL de propositions.
  *
- * \param $dbh Object PDO de connexion à la base de donnée.
+ * \param $dbh Objet PDO de connexion à la base de donnée.
  * \param $id Entier: Id de la proposition recherchée.
  * \param $id_question Entier: Id de la question recherchée.
  * \return Liste des objets Proposition trouvés dans la base de donnée.
@@ -81,7 +81,7 @@ class Proposition {
  * \fn generate ($dbh, $question, $compte = 3)
  * \brief Méthode de tirage au sort de propostions.
  *
- * \param $dbh Object PDO de connexion à la base de donnée.
+ * \param $dbh Objet PDO de connexion à la base de donnée.
  * \param $question Objet Question duquel les propositions vont être tirés.
  * \param $compte Entier: nombre maximum de propositions tirés.
  * \return Liste des objets Proposition tirés au sort.

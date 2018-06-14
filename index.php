@@ -9,19 +9,20 @@
 		$_GET["do"] = "home";
 	$public_area = array("connect", "subscribe", "activate");
 	
-	global $config;
 	include "model/sql.php";
 	include "model/utilisateur.php";
 	include "model/partie.php";
+	include "model/partieJouee.php";
 	include "model/categorie.php";
 	include "model/question.php";
 	include "model/proposition.php";
 	include "model/actions.php";
 	
+	global $config, $dbh, $fail;
+	$fail = false;
 	$dbh = initDB();
 	session_start();
 	
-	$fail = false;
 	
 	if(isset($_POST["usr"]) && isset($_POST["pwd"]) && isset($_POST["mail"])){
 		//Subscribe: try to connect to the account and redirect to the activation if it succeed 
@@ -52,6 +53,15 @@
 			$fail = true;
 			$_GET["do"] = "creation";
 		}
+	}else if(isset($_GET["id_partie"])){
+		//Load an existing partie
+		Partie::clear($dbh, $_SESSION["usr"]);
+		$partie = Partie::get($dbh, $_GET["id_partie"]);
+		if(!isset($partie) || sizeof($partie)!=1){
+			$fail = true;
+			$_GET["do"] = "existante";
+		}else
+			$partie = $partie[0];
 	}else if(isset($_GET["answers"])){
 		//Finish a partie, count score and duration 
 		global $result;
@@ -71,15 +81,9 @@
 		case "home": require 'view/home.php'; break;
 		case "parametres": require 'view/parametres.php'; break;
 		case "existante": require 'view/existante.php'; break;
-		case "creation":
-			global $categories;
-			$categories = Categorie::get($dbh);
-			require 'view/creation.php';
-			break;
-		case "jeu": 
-			global $questionnaire;
+		case "creation": require 'view/creation.php'; break;
+		case "jeu":
 			$partie->start($dbh, $_SESSION["usr"]);
-			$questionnaire = $partie->getQuestionnaire($dbh);
 			require 'view/jeu.php';
 			break;
 		case "finish": require 'view/finish.php'; break;

@@ -165,6 +165,14 @@ label {
 	height: 15vw;
 	display: inline-block;
 }
+#burger {
+	position:fixed;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0vh;
+	z-index:-1;
+}
 
 /* Forms style */
 #code {
@@ -211,6 +219,7 @@ select {
 	background-color: black;
 	font-size: 6vh;
 	font-family:'Burger_Quiz';
+	margin-right: 10px;
 }
 
 /* Modal style */
@@ -235,7 +244,7 @@ select {
 }
 
 /* Game style */
-#intro {
+#intro-game {
 	height:96vh;
 	margin:auto;
 	display:none;

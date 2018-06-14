@@ -9,7 +9,7 @@
  * \fn connect ($dbh, $usr, $pwd)
  * \brief Fonction de connexion utilisateur.
  *
- * \param $dbh Object PDO de connexion à la base de donnée.
+ * \param $dbh Objet PDO de connexion à la base de donnée.
  * \param $usr Pseudo de l'utilisateur entré sur le site.
  * \param $pwd Mot de passe de l'utilisateur entré sur le site.
  * \return Booléan true si la connexion a échoué et false is elle a réussit.
@@ -27,7 +27,7 @@
  * \fn subscribe ($dbh, $usr, $pwd, $mail)
  * \brief Fonction d'inscription utilisateur.
  *
- * \param $dbh Object PDO de connexion à la base de donnée.
+ * \param $dbh Objet PDO de connexion à la base de donnée.
  * \param $usr Pseudo de l'utilisateur entré sur le site.
  * \param $pwd Mot de passe de l'utilisateur entré sur le site.
  * \param $mail Adresse mail de l'utilisateur entrée sur le site.
@@ -52,7 +52,7 @@
  * \fn modify ($dbh, $usr, $pwd)
  * \brief Fonction de modification de compte utilisateur.
  *
- * \param $dbh Object PDO de connexion à la base de donnée.
+ * \param $dbh Objet PDO de connexion à la base de donnée.
  * \param $usr Nouveau pseudo entré sur le site.
  * \param $pwd Nouveau mot de passe entré sur le site.
  */	

@@ -42,7 +42,7 @@ class Question {
  * \fn getCategorie ($dbh)
  * \brief Querry SQL de la categorie de la question.
  *
- * \param $dbh Object PDO de connexion à la base de donnée.
+ * \param $dbh Objet PDO de connexion à la base de donnée.
  * \return Objet Categorie associé à cette question.
  */
 	public function getCategorie($dbh){
@@ -52,7 +52,7 @@ class Question {
  * \fn getPropositions ($dbh)
  * \brief Querry SQL des propositions appartenants à cette question.
  *
- * \param $dbh Object PDO de connexion à la base de donnée.
+ * \param $dbh Objet PDO de connexion à la base de donnée.
  * \return Liste des object Proposition associé à cette question.
  */	
 	public function getPropositions($dbh){
@@ -62,7 +62,7 @@ class Question {
  * \fn get ($dbh, $id=NULL, $id_categorie=NULL)
  * \brief Querry SQL de questions.
  *
- * \param $dbh Object PDO de connexion à la base de donnée.
+ * \param $dbh Objet PDO de connexion à la base de donnée.
  * \param $id Entier: Id de la question recherché.
  * \param $id_categorie Entier: Id de la categorie de la question recherché.
  * \return Liste des objets Question trouvés dans la base de donnée.
@@ -86,7 +86,7 @@ class Question {
  * \fn generate ($dbh, $question)
  * \brief Méthode de tirage au sort de 3 questions.
  *
- * \param $dbh Object PDO de connexion à la base de donnée.
+ * \param $dbh Objet PDO de connexion à la base de donnée.
  * \param $categorie Objet Categorie duquel les questions vont être tirés.
  * \return Liste des objets Question tirés au sort.
  */
