@@ -153,7 +153,7 @@ class Partie {
 	public static function finish($dbh, $utilisateur){
 		/*Get partie and game duration*/
 		//Prepare querry
-		$q = $dbh->prepare("SELECT `id_partie`, TIMEDIFF(TIMEDIFF(NOW(),`Heure_depart`),'00:00:14') as duration
+		$q = $dbh->prepare("SELECT `id_partie`, TIMEDIFF(TIMEDIFF(NOW(),`Heure_depart`),'00:00:14') as duration, NOW()-14-`Heure_depart` as seconds
 							FROM `partie_jouee` WHERE `id_user` = :id_user 
 							AND `Temps` = '00:00:00'");
 		//Bind Values
@@ -165,15 +165,19 @@ class Partie {
 		if(sizeof($result) != 1) return NULL;
 		$partie = new Partie($result[0]["id_partie"]);
 		$duration = $result[0]["duration"];
+		$sec =  $result[0]["seconds"];
 		
-		/*Calculate Score*/
-		$score = 0;
+		/*Calculate Points*/
+		$point = 0;
 		$propositions = $partie->getPropositions($dbh);
 		$user_reponses = array_reverse(str_split($_GET["answers"]));
 		for($i=0; $i<sizeof($propositions); $i++){
 			if((string)($propositions[$i]->getReponse()) == $user_reponses[$i])
-				$score++;
+				$point++;
 		}
+		
+		/*Calculate Score*/
+		$score = floor(100 * $point/sizeof($propositions) / log($seconds>1 ? $seconds : 2));
 		
 		/*Update score and duration*/
 		//Prepare querry
@@ -186,7 +190,7 @@ class Partie {
 		$q->bindValue(':id_partie', $partie->getId(), PDO::PARAM_INT);
 		//Execute
 		$q->execute();
-		return array($score, $duration);
+		return array($point, $duration, $score);
 	}
 /**
  * \fn getQuestionnaire($dbh)

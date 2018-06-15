@@ -8,15 +8,15 @@
 			</a>
 			<p class="yellow title inv">Connexion</p>
 		</div>
-		<form action="index.php?do=home" method="POST">
+		<form action="index.php?do=home" method="POST" onsubmit="return login();">
 			<table align="center">
 				<tr>
 					<td><label for="usr" class="red">Pseudo </label></td>
-					<td><input type="text" name="usr"></input></td>
+					<td><input id="usr" type="text" name="usr"></input></td>
 				</tr>
 				<tr>
 					<td><label for="pwd" class="yellow">Password </label></td>
-					<td><input type="password" name="pwd"></input></td>
+					<td><input id="pwd" type="password" name="pwd"></input></td>
 				</tr>
 				<tr>
 					<td><a class="button bgred grow"  href="index.php">Annuler</a></td>
@@ -24,5 +24,6 @@
 				</tr>
 			</table>
 		</form>
+		<script src="script/form.js"></script>
 	</body>
 </html>

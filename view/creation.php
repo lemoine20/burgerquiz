@@ -19,7 +19,7 @@
 				</a>
 			</div>
 		</div>
-		<form action="index.php?do=jeu" method="POST" style="text-align:center;">
+		<form action="index.php?do=jeu" method="POST" style="text-align:center;" onsubmit="return !isNaN(parseInt(getElementById('count').value));">
 			<div id="selector">
 				<p class="inv" style="font-size: 9vh;">Categorie: </p>
 				<input class="radio" type="radio" id="aleatoire" name="categorie" checked>
@@ -35,7 +35,7 @@
 			</div>
 			<div style="display:inline-block; width:30vw;vertical-align:top;">
 				<label for="count">Propositions par question:</label>
-				<input type="text" name="count" style="width:6vh;" value="3">
+				<input id="count" type="text" name="count" style="width:6vh;" value="3">
 				<input type="submit" class="bggreen button grow" style="float:right;" value="Jouer">
 			</div>
 		</form>

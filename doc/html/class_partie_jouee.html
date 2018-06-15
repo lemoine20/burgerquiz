@@ -98,9 +98,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a561add68bf99b33e424a99c34c878f09"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_partie_jouee.html#a561add68bf99b33e424a99c34c878f09">get</a> ($dbh, $partie=NULL, $utilisateur=NULL, $categorie=NULL, $filter=NULL, $min=NULL, $max=NULL)</td></tr>
-<tr class="memdesc:a561add68bf99b33e424a99c34c878f09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Querry SQL de parties jouées utilisé pour le palmarès.  <a href="#a561add68bf99b33e424a99c34c878f09">More...</a><br /></td></tr>
-<tr class="separator:a561add68bf99b33e424a99c34c878f09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad37f5a8dc79fca89b810757c608f0213"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_partie_jouee.html#ad37f5a8dc79fca89b810757c608f0213">get</a> ($dbh, $partie=NULL, $nom_user=NULL, $nom_categorie=NULL, $filter=NULL, $min=NULL, $max=NULL)</td></tr>
+<tr class="memdesc:ad37f5a8dc79fca89b810757c608f0213"><td class="mdescLeft">&#160;</td><td class="mdescRight">Querry SQL de parties jouées utilisé pour le palmarès.  <a href="#ad37f5a8dc79fca89b810757c608f0213">More...</a><br /></td></tr>
+<tr class="separator:ad37f5a8dc79fca89b810757c608f0213"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
@@ -118,8 +118,8 @@ Data Fields</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Classe representant une partie jouée par un utilisateur. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a561add68bf99b33e424a99c34c878f09"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a561add68bf99b33e424a99c34c878f09">&#9670;&nbsp;</a></span>get()</h2>
+<a id="ad37f5a8dc79fca89b810757c608f0213"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad37f5a8dc79fca89b810757c608f0213">&#9670;&nbsp;</a></span>get()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -143,13 +143,13 @@ Data Fields</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>$utilisateur</em> = <code>NULL</code>, </td>
+          <td class="paramname"><em>$nom_utilisateur</em> = <code>NULL</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>$categorie</em> = <code>NULL</code>, </td>
+          <td class="paramname"><em>$nom_categorie</em> = <code>NULL</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -187,8 +187,8 @@ Data Fields</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">$dbh</td><td>Objet PDO de connexion à la base de donnée. </td></tr>
     <tr><td class="paramname">$partie</td><td>Objet <a class="el" href="class_partie.html" title="Classe representant une partie créer par un utilisateur. ">Partie</a> de la partie jouée recherchée. </td></tr>
-    <tr><td class="paramname">$utilisateur</td><td>Objet <a class="el" href="class_categorie.html" title="Classe representant une categorie(/thème) de questions. ">Categorie</a> de la partie jouée recherchée. </td></tr>
-    <tr><td class="paramname">$categorie</td><td>Objet <a class="el" href="class_utilisateur.html" title="Classe representant un compte utilisateur. ">Utilisateur</a> de la partie jouée recherchée. </td></tr>
+    <tr><td class="paramname">$utilisateur</td><td>Nom d'<a class="el" href="class_utilisateur.html" title="Classe representant un compte utilisateur. ">Utilisateur</a> de la partie jouée recherchée. </td></tr>
+    <tr><td class="paramname">$categorie</td><td>Nom de <a class="el" href="class_categorie.html" title="Classe representant une categorie(/thème) de questions. ">Categorie</a> de la partie jouée recherchée. </td></tr>
     <tr><td class="paramname">$filter</td><td>Chaîne de caractère représentant le filtre utilisé (toutes autres valeurs désactivent le filtrage) valeurs possibles: -"score" pour filtrer par score. -"temps" pour filtrer par temps de jeu. -"date" pour filtrer par date. </td></tr>
     <tr><td class="paramname">$min</td><td>Entier/String: valeur minimal de filtrage (Entier pour le filtre "score" et String pour les autres). </td></tr>
     <tr><td class="paramname">$max</td><td>Entier/String: valeur maximal de filtrage (Entier pour le filtre "score" et String pour les autres). </td></tr>
@@ -391,7 +391,7 @@ Data Fields</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>model/<a class="el" href="partie_jouee_8php.html">partieJouee.php</a></li>
+<li>C:/xampp/htdocs/burgerquiz/model/<a class="el" href="partie_jouee_8php.html">partieJouee.php</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

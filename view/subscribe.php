@@ -9,23 +9,23 @@
 			</a>
 			<p class="yellow title inv">Inscription</p>
 		</div>
-		<form action="index.php?do=activate" method="POST">
+		<form action="index.php?do=activate" method="POST" onsubmit="return sub()">
 			<table align="center">
 				<tr>
 					<td><label for="usr" class="red">Pseudo </label></td>
-					<td><input type="text" name="usr"></input></td>
+					<td><input id="usr" type="text" name="usr"></input></td>
 				</tr>
 				<tr>
 					<td><label for="pwd" class="yellow">Password </label></td>
-					<td><input type="password" name="pwd"></input></td>
+					<td><input id="pwd" type="password" name="pwd"></input></td>
 				</tr>
 				<tr>
 					<td><label for="pwdv" class="red">Confirmation </label></td>
-					<td><input type="password" name="pwdv"></input></td>
+					<td><input id="pwdv" type="password" name="pwdv"></input></td>
 				</tr>
 				<tr>
 					<td><label for="mail" class="yellow">Mail </label></td>
-					<td><input type="text" name="mail"></input></td>
+					<td><input id="mail" type="mail" name="mail"></input></td>
 				</tr>
 				<tr>
 					<td><a class="button bgred grow"  href="index.php">Annuler</a></td>
@@ -33,4 +33,6 @@
 				</tr>
 			</table>
 		</form>
+		<script src="script/form.js"></script>
+	</body>
 </html>

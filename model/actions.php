@@ -12,7 +12,7 @@
  * \param $dbh Objet PDO de connexion à la base de donnée.
  * \param $usr Pseudo de l'utilisateur entré sur le site.
  * \param $pwd Mot de passe de l'utilisateur entré sur le site.
- * \return Booléan true si la connexion a échoué et false is elle a réussit.
+ * \return Message d'erreur si la connexion a échoué et Booléan false is elle a réussit.
  */
 	function connect ($dbh, $usr, $pwd){
 		global $config;
@@ -31,9 +31,15 @@
  * \param $usr Pseudo de l'utilisateur entré sur le site.
  * \param $pwd Mot de passe de l'utilisateur entré sur le site.
  * \param $mail Adresse mail de l'utilisateur entrée sur le site.
- * \return Booléan true si l'inscription a échoué et false is elle a réussit.
+ * \return Message d'erreur si l'inscription a échoué et Booléan false is elle a réussit.
  */
 	function subscribe ($dbh, $usr, $pwd, $mail){
+		//Check pseudo length
+		if(strlen($usr)<4)
+			return "Le pseudo doit avoir une longueur supérieure à 3 caractères.";
+		//Check special char in the pseudo
+		if(preg_match('/[\'"^£$%&*()}{#~?><>,|=_+¬-]/', $usr))
+			return "Le pseudo comporte des caractères spéciaux non-autorisés.";
 		//Check same name
 		if(sizeof(Utilisateur::get($dbh, NULL, $usr, NULL, NULL, NULL)) != 0)
 			return "Un compte utilise déjà ce pseudo.";
@@ -43,8 +49,12 @@
 		global $config;
 		$_SESSION["usr"] = new Utilisateur(NULL, $usr, hash_hmac("sha256",$pwd,$config["hashkey"]), $mail);
 		$_SESSION["usr"]->ins($dbh);
-		mail($_POST["mail"] ,"Bienvenue à Burger Quiz", "Nous vous souhaitons la bienvenue à Burger Quiz,".
-										"\nVoici votre code d'activation :".$_SESSION["usr"]->getCode().".","Content-Type: text/html; charset=UTF-8");
+		//Send the activation code by mail
+		if(!mail($_POST["mail"] ,"Bienvenue à Burger Quiz", "Nous vous souhaitons la bienvenue à Burger Quiz,".
+										"\nVoici votre code d'activation :".$_SESSION["usr"]->getCode().".","Content-Type: text/html; charset=UTF-8")){
+			$_SESSION["usr"]->del($dbh);
+			return "L'addresse mail est invalide.";
+		}
 		return false;
 	}
 
