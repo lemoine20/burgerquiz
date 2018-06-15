@@ -50,6 +50,7 @@
 		$_SESSION["usr"] = new Utilisateur(NULL, $usr, hash_hmac("sha256",$pwd,$config["hashkey"]), $mail);
 		$_SESSION["usr"]->ins($dbh);
 		//Send the activation code by mail
+		if($config["usemail"])  // (for tests in environement without mail)
 		if(!mail($_POST["mail"] ,"Bienvenue à Burger Quiz", "Nous vous souhaitons la bienvenue à Burger Quiz,".
 										"\nVoici votre code d'activation :".$_SESSION["usr"]->getCode().".","Content-Type: text/html; charset=UTF-8")){
 			$_SESSION["usr"]->del($dbh);

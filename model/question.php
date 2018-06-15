@@ -69,11 +69,11 @@ class Question {
  */
 	public static function get($dbh, $id=NULL, $id_categorie=NULL){
 		//Generate conditions
-		$conditions = "1 ";
+		$conditions = "";
 		if(isset($id))				$conditions .= " AND `id_question` = :id";
 		if(isset($id_categorie))	$conditions .= " AND `id_categorie` = :categorie";
 		//Prepare querry
-		$q = $dbh->prepare("SELECT `id_question` as id, `label1`, `label2`, `id_categorie` FROM `question` WHERE ".$conditions.";");
+		$q = $dbh->prepare("SELECT `id_question` as id, `label1`, `label2`, `id_categorie` FROM `question` WHERE actif_question = 1".$conditions.";");
 		//Bind values
 		if(isset($id))				$q->bindValue(':id', $id, PDO::PARAM_INT);
 		if(isset($id_categorie))	$q->bindValue(':categorie', $id_categorie, PDO::PARAM_INT);

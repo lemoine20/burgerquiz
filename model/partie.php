@@ -147,7 +147,7 @@ class Partie {
  * \brief Termine une partie et comptabilise le temps et le score.
  * \param $dbh Objet PDO de connexion à la base de donnée.
  * \param $compte Objet Utilisateur qui a joué la partie.
- * \return  - une liste comportant le score et la durée de la partie.
+ * \return  - une liste comportant les points la durée et le score de la partie.
  *			- NULL si la partie n'a pas été trouvée
  */
 	public static function finish($dbh, $utilisateur){
@@ -165,7 +165,7 @@ class Partie {
 		if(sizeof($result) != 1) return NULL;
 		$partie = new Partie($result[0]["id_partie"]);
 		$duration = $result[0]["duration"];
-		$sec =  $result[0]["seconds"];
+		$seconds =  $result[0]["seconds"];
 		
 		/*Calculate Points*/
 		$point = 0;

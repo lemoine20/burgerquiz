@@ -55,7 +55,8 @@ CREATE TABLE Question(
         id_question  Int  Auto_increment  NOT NULL ,
         label1       Varchar (50) NOT NULL ,
         label2       Varchar (50) NOT NULL ,
-        id_categorie Int NOT NULL
+        id_categorie Int NOT NULL ,
+        actif_question Bool DEFAULT 1
     ,CONSTRAINT Question_PK PRIMARY KEY (id_question)
 
     ,CONSTRAINT Question_Categorie_FK FOREIGN KEY (id_categorie) REFERENCES Categorie(id_categorie)
@@ -68,9 +69,10 @@ CREATE TABLE Question(
 
 CREATE TABLE Proposition(
         id_proposition  Int  Auto_increment  NOT NULL ,
-        nom_proposition Varchar (50) NOT NULL ,
-        reponse         Int NOT NULL ,
-        id_question     Int NOT NULL
+        nom_proposition Varchar (100) NOT NULL ,
+        reponse         Int NOT NULL,
+        id_question     Int NOT NULL,
+        actif_proposition Bool DEFAULT 1
     ,CONSTRAINT Proposition_PK PRIMARY KEY (id_proposition)
 
     ,CONSTRAINT Proposition_Question_FK FOREIGN KEY (id_question) REFERENCES Question(id_question)
@@ -108,6 +110,15 @@ CREATE TABLE Partie_Proposition(
 )ENGINE=InnoDB;
 
 --
+-- Contenu de la table `utilisateur`
+--
+
+INSERT INTO `Utilisateur` (`id_user`, `nom`, `mots_de_passe`, `mail`, `code_d_activation`) VALUES
+(14, 'pierre', '85a109edde40c0511d3a6e2bdeb30932e519c13232f2cf064ed0e305508c11bf', 'pierre@gmail.oom', 0),
+(15, 'jean', '0fea429e4f11a2b34631536d400818f91fe649a1088672859379e5746b4d26f7', 'jean@gmail.com', 0),
+(16, 'george', 'ea997e808b2db181fe7f6480fc1a502469d2000d9a183102a5685a805d3f7a9b', 'george@gmail.com', 0);
+
+--
 -- Contenu de la table `Categorie`
 --
 
@@ -116,7 +127,8 @@ INSERT INTO `Categorie` (`id_categorie`, `nom_categorie`) VALUES
 (2, 'CINEMA'),
 (3, 'POLITIQUE'),
 (4, 'AUTRE'),
-(5, 'MUSIQUE');
+(5, 'MUSIQUE'),
+(6, 'ISEN');
 
 --
 -- Contenu de la table `Question`
@@ -153,7 +165,10 @@ INSERT INTO `Question` (`id_question`, `label1`, `label2`, `id_categorie`) VALUE
 (30, 'UNE FILLE', 'UN GARS', 4),
 (31, 'MUSICIEN', 'DICTATEUR', 5),
 (32, 'MYLENE FARMER', 'UNE VILAINE FERMIERE', 5),
-(33, 'CHANTEUR', 'TERRORISTE', 5);
+(33, 'CHANTEUR', 'TERRORISTE', 5),
+(34, 'LES CIR', ' LES CSI', 6),
+(35, 'LES RENNAIS', ' LES BRESTOIS', 6),
+(36, 'PIXEL', 'COSMUNITY', 6);
 
 --
 -- Contenu de la table `Proposition`
@@ -171,7 +186,7 @@ INSERT INTO `Proposition` (`id_proposition`, `nom_proposition`, `reponse`, `id_q
 (9, '20 ANS DE PLUS', 2, 2),
 (10, 'EST EN DIRECT', 1, 2),
 (11, 'EST SORTI AU LOTO SAMEDI', 2, 3),
-(12, 'S\'APPELE FANCE2 AUJOURD\'HUI', 1, 3),
+(12, 'S\'APPELE FANCE 2 AUJOURD\'HUI', 1, 3),
 (13, 'VOUS PREFEREREZ PAPA OU MAMAN', 3, 3),
 (14, 'UN DAMIER C\'EST NOIR OU BLANC', 3, 3),
 (15, 'CA VAUT 1 PLUS 1', 2, 3),
@@ -208,7 +223,7 @@ INSERT INTO `Proposition` (`id_proposition`, `nom_proposition`, `reponse`, `id_q
 (46, 'AU DEBUT,IL AVAIT 5 DOIGTS', 3, 12),
 (47, 'IL A DE GRANDES OREILLES', 2, 12),
 (48, 'SON PREMIER NOM ETAIT MORTIMER', 2, 12),
-(49, 'SIL A TAGUE LE PLAFONDDE LA CHAPELLE SIXTINE', 1, 12),
+(49, 'IL A TAGUE LE PLAFOND DE LA CHAPELLE SIXTINE', 1, 12),
 (50, 'MAIS PUISQUE JE VOUS DIS QUE C\'EST UNE SOURIS', 2, 12),
 (51, 'UN FILM AVEC NICOLE KIDMAN', 2, 13),
 (52, 'UN FILM DE CLAUDE LELOUCH', 3, 13),
@@ -272,7 +287,7 @@ INSERT INTO `Proposition` (`id_proposition`, `nom_proposition`, `reponse`, `id_q
 (110, 'OPHELIE WINTER', '1', 25),
 (111, 'MARYLIN MONROE', '3', 25),
 (112, 'EDITH PIAF', '2', 25),
-(113, 'A EU LE DROIT DE PORTER LE NUMERO 10 ALA JUVE', '1', 26),
+(113, 'A EU LE DROIT DE PORTER LE NUMERO 10 A LA JUVE', '1', 26),
 (114, 'D\'ABORD LA JAMBE GAUCHE', '2', 26),
 (115, 'A PRIS 40KG DEPUIS SADERNIERE COUPE DU MONDE', '1', 26),
 (116, 'A GAGNE LA COUPE DU MONDE','2', 26),
@@ -306,9 +321,22 @@ INSERT INTO `Proposition` (`id_proposition`, `nom_proposition`, `reponse`, `id_q
 (144, 'LES FERMIERS DETESTENT', '2', 32),
 (145, 'A EPOUSE UN BOUTONNEUX', '2', 32),
 (146, 'A EPOUSE BOUTONNAT', '1', 32),
-(147, 'S\'APPELLE MARIE- HELENE GAUTHIER', '1',32),
+(147, 'S\'APPELLE MARIE-HELENE GAUTHIER', '1',32),
 (148, 'BEN HARPER', '1', 33),
 (149, 'BEN LADEN', '2', 33),
 (150, 'PATRICK FIORI', '1', 33),
 (151, 'LA BANDE A BASILE', '1', 33),
-(152, 'LA BANDE A BADER', '2', 33);
+(152, 'LA BANDE A BADER', '2', 33),
+(153, 'ONT DES COLLES', '2', 34),
+(154, 'FONT UN STAGE OUVRIER', '2', 34),
+(155, 'BRUTE FORCE TOUT SES PROBLEMES', '1', 34),
+(156, 'A TOUJOURS 100% AU CCNA', '1', 34),
+(157, 'ONT UN COUR DE COLORIAGE', '3', 34),
+(158, 'HTC VIVE', '1', 35),
+(159, 'CONNAISSENT PLUS DE 3 MOTS BRETONS', '2', 35),
+(160, 'N\’ONT PAS LA MOYENNE', '2', 35),
+(161, 'PASSENT LEURS JEUDI APREM A LA PLAGE', '2', 35),
+(162, 'CONNAISSENT BIEN LA PLUIE', '3', 35),
+(163, 'A GAGNE LA CAMPAGNE', '2', 36),
+(164, 'A ORGANISE UN PETIT DEJEUNER', '3', 36),
+(165, 'A ESSAYE DE TRICHER PENDANT LA CAMPAGNE', '1', 36);
